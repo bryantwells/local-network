@@ -1,0 +1,13 @@
+# Use Node base image
+FROM node:alpine
+
+# Set the work directory
+WORKDIR /usr/src/local-tv-middleware
+
+COPY ./server/package.json /usr/src/local-tv-middleware/package.json
+
+# Install dependencies
+RUN npm install
+
+# Run the app
+CMD npm run dev

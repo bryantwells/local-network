@@ -1,0 +1,17 @@
+# Use Node base image
+FROM node:alpine
+
+# install simple http server for serving static content
+RUN npm install -g http-server
+
+# Set the work directory
+WORKDIR /usr/src/local-home-app
+
+# copy both 'package.json' and 'package-lock.json' (if available)
+COPY ./app/package*.json ./
+
+# Install dependencies
+RUN npm install
+
+# Run the app
+CMD npm run dev
