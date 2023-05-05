@@ -62,10 +62,8 @@ export default {
 		this.initProcessor();
         this.initWorker();
 	},
-    unmounted() {
-        if (this.isRecording) {
-            this.stopRecording();
-        }
+    beforeUnmount() {
+        this.stopRecording();
     },
 	methods: {
 
@@ -110,7 +108,6 @@ export default {
             });
             this.encoderWorker.addEventListener('message', (e) => {
                 if (e.data.cmd == 'end') {
-                    console.log('put');
                     this.putSourceData(this.userId, this.mountId, e.data.payload, this.targetBufferLength, this.metadata);
                 }
             });
@@ -170,18 +167,18 @@ export default {
 		 * Stop Recording
 		 */
 		stopRecording() {
-			
-			// Disconnect
-            this.sourceNode.disconnect();
-            this.context.suspend();
-
-            // Kill source
             if (this.isRecording) {
+			
+                // Disconnect
+                this.sourceNode.disconnect();
+                this.context.suspend();
+
+                // Kill source
                 this.killSource(this.userId, this.mountId, this.targetBufferLength);
-            }
-            
-            // Update var
-            this.isRecording = false;
+
+                // Update var
+                this.isRecording = false;
+            }            
 		},
 
         /**

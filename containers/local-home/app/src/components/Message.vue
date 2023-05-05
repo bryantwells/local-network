@@ -1,31 +1,34 @@
 <template>
 	<section 
-		class="ErrorMessage">
-		<div 
-			class="ErrorMessage-body">
-			<p>
-				{{ message }}
-			</p>
-		</div>
+		class="Message"
+		:style="{
+			background: color
+		}">
+		<slot></slot>
 	</section>
 </template>
 
 <script>
 export default {
-	name: "ErrorMessage",
+	name: "Message",
 	props: {
 		message: String,
+		color: {
+			default: 'lightgray',
+			type: String,
+		}
 	}
 }
 </script>
 
 <style>
-.ErrorMessage {
+.Message {
 	padding: 0.5rem;
 	min-height: 100%;
 	border-radius: 0.5rem;
+	background-color: lightgray;
 }
-.ErrorMessage-body {
+.Message-body {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;

@@ -214,7 +214,6 @@ export class IcecastService {
      * List sources from the JSON database
      */
     getSourceList() {
-        console.log(this.db.data);
         return this.db.data.sources;
     }
 

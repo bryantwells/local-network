@@ -34,7 +34,7 @@ export default {
     flex-direction: column;
     color: black;
     padding: 0.5rem;
-	white-space: nowrap;
+	min-height: 100%;
 }
 .DashboardLink-title {
     flex: 1;
@@ -45,10 +45,8 @@ export default {
     padding: 0.5rem;
     border-radius: 0.5rem;
     text-align: center;
-}
-.DashboardLink-title,
-.DashboardLink-button {
 	text-overflow: ellipsis;
 	overflow: hidden;
+	white-space: nowrap;
 }
 </style>

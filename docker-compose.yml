@@ -55,22 +55,6 @@ services:
       - ./containers/local-radio/local-radio-middleware/server/models:/usr/src/local-radio-middleware/models
       - ./containers/local-radio/local-radio-middleware/server/modules:/usr/src/local-radio-middleware/modules
 
-  radio-app:
-    container_name: local-radio-app
-    build:
-      context: ./containers/local-radio/local-radio-app
-      dockerfile: Dockerfile.dev
-    environment:
-      - VITE_LOCAL_RADIO_MIDDLEWARE_PORT=$LOCAL_RADIO_MIDDLEWARE_PORT
-      - VITE_LOCAL_RADIO_SERVER_PORT=$LOCAL_RADIO_SERVER_PORT
-      - VITE_LOCAL_HOME_HOSTNAME=$LOCAL_HOME_HOSTNAME
-      - VITE_LOCAL_HOME_PORT=$LOCAL_HOME_PORT
-    volumes:
-      - ./containers/local-radio/local-radio-app/app/public:/usr/src/local-radio-app/public
-      - ./containers/local-radio/local-radio-app/app/src:/usr/src/local-radio-app/src
-      - ./containers/local-radio/local-radio-app/app/index.html:/usr/src/local-radio-app/index.html
-      - ./containers/local-radio/local-radio-app/app/vite.config.js:/usr/src/local-radio-app/vite.config.js
-
   # TV
   # --------------------------------
   # --------------------------------

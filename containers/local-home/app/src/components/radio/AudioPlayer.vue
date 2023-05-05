@@ -1,12 +1,11 @@
 <template>
-	<div class="AudioPlayer">
+	<div 
+        class="AudioPlayer">
 		<audio
             class="AudioPlayer-audio"
-            :class="{ 'is-playable': isPlayable }"
-            :src="src"
+            ref="audio"
             controls
-            @error="handleError"
-            @loadedmetadata.once="handleLoadedMetadata" />
+        />
 	</div>
 </template>
 
@@ -14,49 +13,34 @@
 export default {
 	name: "AudioPlayer",
 	data() {
-        return {
-            src: '',
-            isPlayable: false,
-        }
-    },
+		return {
+			isLoaded: false,
+		}
+	},
     computed: {
-        cacheBustedSrc() {
-            const url = new URL(window.location);
-            return url;
-        }
-    },
-    mounted() {
-        this.src = this.getSrc();
-    },
-    methods: {
-        /**
-         * Handle 'error' event
-         * Keep reloading the audio player until it doesn't 404
-         */
-        handleError() {
-            setTimeout(() => {
-                this.src = this.getSrc();
-            }, 1000);
-            return true;
-        },
-
-        /**
-         * Handle 'canplay' event
-         */
-        handleLoadedMetadata() {
-            this.isLoaded = true;
-        },
-
-        /**
-         * Get the URL for the audio player
-         */
-        getSrc() {
-            const SERVER_PORT = import.meta.env.VITE_LOCAL_RADIO_SERVER_PORT || 3000;
+        src() {
+			const SERVER_PORT = import.meta.env.VITE_LOCAL_RADIO_SERVER_PORT || 3000;
             const protocol = window.location.protocol;
             const hostname = window.location.hostname;
             const hash = Math.random().toString(36).substring(2,10);
             return `${ protocol }//${ hostname }:${ SERVER_PORT }/local-radio?cb=${ hash }`
-        }
+		}
+    },
+    mounted() {
+        const loadAudioInterval = setInterval(() => {
+			if (this.urlExists(this.src)) {
+				this.$refs.audio.src = this.src;
+				clearInterval(loadAudioInterval);
+			}
+		}, 1000);
+    },
+    methods: {
+        urlExists(url) {
+			const http = new XMLHttpRequest();
+			http.open('HEAD', url, false);
+			http.send();
+			return http.status != 404;
+		},
     },
 }
 </script>

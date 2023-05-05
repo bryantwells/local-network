@@ -4,7 +4,6 @@ FROM node:bullseye
 # Install sound library
 RUN apt update && \
     apt upgrade -y && \
-    apt install -y lame &&\
     apt install -y ffmpeg &&\
     apt install -y libvorbis-dev
 

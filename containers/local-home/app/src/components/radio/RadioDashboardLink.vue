@@ -6,10 +6,10 @@ import { useRadioStore } from '@/stores/radio';
 <template>
 	<router-link  
 		class="DashboardLink DashboardLink--radio"
-		to="dashboard/radio">
+		to="/dashboard/radio">
 		<div 
 			class="DashboardLink-title">
-			Local Radio (Available)
+			Local Radio is currently available for broadcasting.
 		</div>
 		<div
 			class="DashboardLink-button">

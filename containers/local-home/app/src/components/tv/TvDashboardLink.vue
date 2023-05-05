@@ -4,14 +4,18 @@ import { useTvStore } from '@/stores/tv';
 </script>
 
 <template>
-	<div class="DashboardLink DashboardLink--tv">
-		<div class="DashboardLink-title">
+	<router-link 
+		class="DashboardLink DashboardLink--tv"
+		to="/tv">
+		<div 
+			class="DashboardLink-title">
 			Local TV (Available)
 		</div>
-		<a class="DashboardLink-button">
+		<a 
+			class="DashboardLink-button">
 			Create Video Stream
 		</a>
-	</div>
+	</router-link>
 </template>
 
 <script>

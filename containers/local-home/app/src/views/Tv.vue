@@ -1,19 +1,25 @@
 <script setup>
 import { mapState } from 'pinia';
-import { useRadioStore } from '@/stores/radio';
+import { useTvStore } from '@/stores/tv';
 import Preview from '@/components/Preview.vue';
 import Dashboard from '@/components/Dashboard.vue';
 </script>
 
 <template>
     <Preview
-        type="radio"
+        v-if="activeSource"
+        type="tv"
+    />
+    <Dashboard
+        v-else
+        type="tv"
+        :user-id="userId"
     />
 </template>
 
 <script>
 export default {
-	name: "RadioPage",
+	name: "TvPage",
     components: {
         Preview,
         Dashboard,
@@ -22,7 +28,7 @@ export default {
         userId: String,
     },
     computed: {
-		...mapState(useRadioStore, ['activeSource', 'activeSourceExists']),
+		...mapState(useTvStore, ['activeSource']),
 	},
 };
 </script>

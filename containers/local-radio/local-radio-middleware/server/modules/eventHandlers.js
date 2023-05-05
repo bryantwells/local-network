@@ -14,6 +14,7 @@ export default (io, icecastService) => {
 	async function createSource(userId, mountId, bufferLength, metadata) {
         await icecastService.createSource(userId, mountId, bufferLength, metadata);
         io.emit('sourceList', icecastService.getSourceList());
+		console.log('createSource', userId, mountId);
 	}
 
 	// Put Source Data
@@ -28,7 +29,7 @@ export default (io, icecastService) => {
             .input(bufferStream)
             .inputFormat('s16le')
             .audioCodec('libvorbis')
-            .audioQuality(1)
+			.audioFrequency(48000)
             .format('ogg')
             .on('error', (err) => {
 
@@ -38,7 +39,8 @@ export default (io, icecastService) => {
             })
             .on('end', async () => {
 
-				// on encoding completion
+				// on encoding completion990
+
                 const oggBuffer = readFileSync('./buffer.ogg');
                 await icecastService.putSourceData(userId, mountId, oggBuffer, bufferLength, metadata);
             })
@@ -49,6 +51,7 @@ export default (io, icecastService) => {
 	async function killSource(userId, mountId, bufferLength) {
         await icecastService.killSource(userId, mountId, bufferLength);
         io.emit('sourceList', icecastService.getSourceList());
+		console.log('killSource', userId, mountId);
 	}
 
 	return {

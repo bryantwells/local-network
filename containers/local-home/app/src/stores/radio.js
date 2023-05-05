@@ -17,6 +17,9 @@ export const useRadioStore = defineStore('radio', () => {
 	const activeSource = computed(() => {
 		return sources.value.find((source) => source.mountId == 'local-radio');
 	});
+	const activeSourceExists = computed(() => {
+		return sources.value.filter((source) => source.mountId == 'local-radio').length > 0;
+	});
 	
 	// Functions
 	function createSource(userId, mountId, bufferLength, metadata) {
@@ -34,5 +37,5 @@ export const useRadioStore = defineStore('radio', () => {
 		sources.value = data;
 	});
 
-	return { sources, activeSource, createSource, putSourceData, killSource };
+	return { sources, activeSource, activeSourceExists, createSource, putSourceData, killSource };
 })

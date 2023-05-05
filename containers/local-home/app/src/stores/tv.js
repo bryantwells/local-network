@@ -6,9 +6,9 @@ export const useTvStore = defineStore('tv', () => {
 
 	// setup
 	const protocol = window.location.protocol;
-	const TV_MIDDLEWARE_HOSTNAME = import.meta.env.VITE_LOCAL_TV_MIDDLEWARE_HOSTNAME || 'localhost';
+	const TV_HOSTNAME = import.meta.env.VITE_LOCAL_TV_HOSTNAME || 'localhost';
 	const RADIO_MIDDLEWARE_PORT = import.meta.env.VITE_LOCAL_TV_MIDDLEWARE_PORT || 3000;
-	const socket = SocketIO(`${ protocol }//${ TV_MIDDLEWARE_HOSTNAME }:${ RADIO_MIDDLEWARE_PORT }`);
+	const socket = SocketIO(`${ protocol }//${ TV_HOSTNAME }:${ RADIO_MIDDLEWARE_PORT }`);
 
 	// State
 	const sources = ref([]);
