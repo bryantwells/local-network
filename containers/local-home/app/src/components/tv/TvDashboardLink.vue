@@ -9,7 +9,7 @@ import { useTvStore } from '@/stores/tv';
 		to="/tv">
 		<div 
 			class="DashboardLink-title">
-			Local TV (Available)
+			Local TV is currently available for broadcasting
 		</div>
 		<a 
 			class="DashboardLink-button">

@@ -1,6 +1,7 @@
 <script setup>
 import RadioDashboard from '@/components/radio/RadioDashboard.vue';
 import TvDashboard from '@/components/tv/TvDashboard.vue';
+import LibraryDashboard from '@/components/library/LibraryDashboard.vue';
 </script>
 
 <template>
@@ -9,6 +10,8 @@ import TvDashboard from '@/components/tv/TvDashboard.vue';
 		:user-id="userId" />
 	<TvDashboard 
 		v-if="type == 'tv'" />
+	<LibraryDashboard 
+		v-if="type == 'library'" />
 </template>
 
 <script>
@@ -17,6 +20,7 @@ export default {
 	components: {
 		RadioDashboard,
 		TvDashboard,
+		LibraryDashboard
 	},
 	props: {
 		type: String,

@@ -28,6 +28,8 @@ services:
       - ./containers/local-home/app/src:/usr/src/local-home-app/src
       - ./containers/local-home/app/index.html:/usr/src/local-home-app/index.html
       - ./containers/local-home/app/vite.config.js:/usr/src/local-home-app/vite.config.js
+    ports: 
+      - 7777:5173
 
   # Radio
   # --------------------------------
@@ -104,32 +106,12 @@ services:
     restart: unless-stopped
     build: 
       context: ./containers/local-library
-      dockerfile: Dockerfile.dev
+      dockerfile: Dockerfile.dev      
     volumes:
       - ./containers/local-library/config/nginx.conf:/etc/nginx/conf.d/default.conf
+      - ./containers/local-library/config/php.ini:/etc/php81/conf.d/settings.ini
       - ./containers/local-library/files:/var/www/files
-      - ./containers/local-library/scripts:/var/www/scripts
-
-  # Admin
-  # --------------------------------
-  # --------------------------------
-
-  admin:
-    container_name: local-admin
-    build:
-      context: ./containers/local-admin
-      dockerfile: Dockerfile.dev
-    environment:
-      - VITE_LOCAL_RADIO_HOSTNAME=$LOCAL_RADIO_HOSTNAME
-      - VITE_LOCAL_RADIO_MIDDLEWARE_PORT=$LOCAL_RADIO_MIDDLEWARE_PORT
-      - VITE_LOCAL_RADIO_SERVER_PORT=$LOCAL_RADIO_SERVER_PORT
-      - VITE_LOCAL_HOME_HOSTNAME=$LOCAL_HOME_HOSTNAME
-      - VITE_LOCAL_HOME_PORT=$LOCAL_HOME_PORT
-    volumes:
-      - ./containers/local-admin/app/public:/usr/src/local-admin-app/public
-      - ./containers/local-admin/app/src:/usr/src/local-admin-app/src
-      - ./containers/local-admin/app/index.html:/usr/src/local-admin-app/index.html
-      - ./containers/local-admin/app/vite.config.js:/usr/src/local-admin-app/vite.config.js
+      - ./containers/local-library/html:/var/www/html
 
   # Router
   # --------------------------------
@@ -150,7 +132,6 @@ services:
       - ${LOCAL_TV_MIDDLEWARE_PORT}:8500
       - ${LOCAL_TV_APP_PORT}:8600
       - ${LOCAL_LIBRARY_PORT}:8700
-      - ${LOCAL_ADMIN_PORT}:8800
     volumes:
       - ./containers/local-router/config/nginx.conf:/etc/nginx/conf.d/default.conf
       - ./containers/local-router/config/proxy.conf:/etc/nginx/includes/proxy.conf

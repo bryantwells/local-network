@@ -1,12 +1,3 @@
 {
-  "sources": [
-    {
-      "userId": "l1vn3ho6",
-      "mountId": "local-radio",
-      "metadata": {
-        "title": "",
-        "description": ""
-      }
-    }
-  ]
+  "sources": []
 }

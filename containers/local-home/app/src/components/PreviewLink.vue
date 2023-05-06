@@ -41,4 +41,20 @@ export default {
 	text-overflow: ellipsis;
 	overflow: hidden;
 }
+.PreviewLink-image {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	border-radius: 0.5rem;
+}
+.PreviewLink-button {
+    background-color: black;
+    color: white;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    text-align: center;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+}
 </style>

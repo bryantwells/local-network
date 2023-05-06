@@ -106,7 +106,7 @@ export default {
                 'cmd': 'init',
                 'bufferLength': this.targetBufferLength,
             });
-            this.encoderWorker.addEventListener('message', (e) => {
+            this.encoderWorker.addEventListener('BodyText', (e) => {
                 if (e.data.cmd == 'end') {
                     this.putSourceData(this.userId, this.mountId, e.data.payload, this.targetBufferLength, this.metadata);
                 }
@@ -149,8 +149,8 @@ export default {
 
                     // AudioWorkletProcessor Event
                     // Pass buffer to the encoder whenever they are made avaialbe
-                    this.encoderProcessorNode.port.onmessage = (e) => {
-                        this.encoderWorker.postMessage({
+                    this.encoderProcessorNode.port.onBodyText = (e) => {
+                        this.encoderWorker.postBodyText({
                             'cmd': 'append',
                             'buffer': e.data
                         });

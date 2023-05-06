@@ -3,7 +3,7 @@ import { mapState } from 'pinia';
 import { useRadioStore } from '@/stores/radio';
 import AudioPlayer from '@/components/radio/AudioPlayer.vue';
 import DashboardLink from '@/components/DashboardLink.vue';
-import Message from '@/components/Message.vue';
+import BodyText from '@/components/BodyText.vue';
 </script>
 
 <template>
@@ -28,9 +28,9 @@ import Message from '@/components/Message.vue';
             v-else-if="hostnameIsLocalIp"
             :type="'radio'"
         />
-		<Message>
+		<BodyText>
 			<p>No Local Radio stream is currently available. Visit the local network to create one.</p>
-		</Message>
+		</BodyText>
 	</div>
 </template>
 

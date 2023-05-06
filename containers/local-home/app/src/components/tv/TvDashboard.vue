@@ -1,7 +1,12 @@
+<script setup>
+import BodyText from '@/components/BodyText.vue';
+</script>
+
 <template>
     <div 
         class="Dashboard Dashboard--tv">
-        <div class="Dashboard-bodyText">
+        <BodyText
+            color="rgb(0,255,0)">
             <p>Local TV can only be operated from the office on the MGX farm. To set up a stream, follow these directions:</p>
             <ol>
                 <li>
@@ -17,13 +22,16 @@
                     Click the “Start Stream” button.
                 </li>
             </ol>
-        </div>
+        </BodyText>
     </div>
 </template>
 
 <script>
 export default {
 	name: "TvDashboard",
+    components: {
+        BodyText
+    },
     props: {
         userId: String,
     },

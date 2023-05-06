@@ -1,26 +1,21 @@
 <script setup>
-import { mapState } from 'pinia';
-import { useRadioStore } from '@/stores/radio';
 import Preview from '@/components/Preview.vue';
 </script>
 
 <template>
     <Preview
-        type="radio"
+        type="library"
     />
 </template>
 
 <script>
 export default {
-	name: "RadioPage",
+	name: "LibraryPage",
     components: {
         Preview,
     },
     props: {
         userId: String,
-    },
-    computed: {
-		...mapState(useRadioStore, ['activeSource', 'activeSourceExists']),
-	},
+    }
 };
 </script>

@@ -6,7 +6,7 @@ import { useLibraryStore } from '@/stores/library';
 
 import PreviewLink from '@/components/PreviewLink.vue';
 import DashboardLink from '@/components/DashboardLink.vue';
-import Message from '../components/Message.vue';
+import BodyText from '@/components/BodyText.vue';
 </script>
 
 <template>
@@ -20,11 +20,11 @@ import Message from '../components/Message.vue';
             v-else-if="!activeRadioSource && hostnameIsLocalIp" 
             :type="'radio'"
         />
-        <Message
+        <BodyText
             v-else
             color="rgb(255,0,0)">
             <p>No active Local Radio broadcasts.</p>
-        </Message>
+        </BodyText>
         <!-- TV -->
         <PreviewLink 
             v-if="activeTvSource" 
@@ -34,10 +34,11 @@ import Message from '../components/Message.vue';
             v-else-if="!activeTvSource && hostnameIsLocalIp"
             :type="'tv'"
         />
-        <Message
+        <BodyText
             v-else
-            message="Local TV (no active video streams)"
-        />
+            color="rgb(0,255,0)">
+            <p>No active Local TV broadcasts.</p>
+        </BodyText>
         <!-- Library -->
         <PreviewLink 
             :type="'library'"
@@ -51,14 +52,13 @@ export default {
     components: {
         PreviewLink,
         DashboardLink,
-        Message,
+        BodyText,
     },
     computed: {
         ...mapState(useRadioStore, { radioSources: 'sources', activeRadioSource: 'activeSource' }),
         ...mapState(useTvStore, { tvSources: 'sources', activeTvSource: 'activeSource' }),
         ...mapState(useLibraryStore, { libraryFiles: 'files' }),
         hostnameIsLocalIp() {
-            return false;
             return import.meta.env.VITE_LOCAL_IP == window.location.hostname;
         },
     }
