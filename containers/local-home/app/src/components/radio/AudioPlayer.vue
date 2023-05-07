@@ -10,14 +10,10 @@ import { useRadioStore } from '@/stores/radio';
 			Now Playing:
 			<br>{{ activeSource.metadata.title }} (Live)
 		</div>
-		<audio
-            class="AudioPlayer-audio"
-            ref="audio"
-			:src="src"
-			controls
-			@error="handleError"
-            @loadedmetadata.once="handleLoadedMetadata"
-        />
+		<audio class="AudioPlayer-audio" controls>
+			<source :src="oggSrc" type="audio/ogg" />
+			<source :src="mp3Src" type="audio/mpeg" />
+		</audio>
 	</div>
 </template>
 
@@ -32,26 +28,15 @@ export default {
 	},
     computed: {
 		...mapState(useRadioStore, ['activeSource']),
-    },
-    mounted() {
-        this.src = this.getSrc();
-    },
-    methods: {
-		handleError() {
-            setTimeout(() => {
-                this.src = this.getSrc();
-            }, 1000);
-            return true;
-        },
-        handleLoadedMetadata() {
-            this.isLoaded = true;
-        },
-		getSrc() {
-			const protocol = window.location.protocol;
-			const RADIO_HOSTNAME = import.meta.env.VITE_LOCAL_RADIO_HOSTNAME || localhost;
-            const RADIO_SERVER_PORT = import.meta.env.VITE_LOCAL_RADIO_SERVER_PORT || 3000;
+		oggSrc() {
+			const HOSTNAME = import.meta.env.VITE_HOSTNAME;
             const hash = Math.random().toString(36).substring(2,10);
-            return `${ protocol }//${ RADIO_HOSTNAME }:${ RADIO_SERVER_PORT }/local-radio?cb=${ hash }`
+            return `//radio-server.${ HOSTNAME }/local-radio?cb=${ hash }`;
+        },
+		mp3Src() {
+			const HOSTNAME = import.meta.env.VITE_HOSTNAME;
+            const hash = Math.random().toString(36).substring(2,10);
+            return `//radio-server.${ HOSTNAME }/local-radio-mp3?cb=${ hash }`;
         },
     },
 }

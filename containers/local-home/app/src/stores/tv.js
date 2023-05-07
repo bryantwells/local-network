@@ -5,10 +5,8 @@ import SocketIO from "socket.io-client";
 export const useTvStore = defineStore('tv', () => {
 
 	// setup
-	const protocol = window.location.protocol;
-	const TV_HOSTNAME = import.meta.env.VITE_LOCAL_TV_HOSTNAME || 'localhost';
-	const RADIO_MIDDLEWARE_PORT = import.meta.env.VITE_LOCAL_TV_MIDDLEWARE_PORT || 3000;
-	const socket = SocketIO(`${ protocol }//${ TV_HOSTNAME }:${ RADIO_MIDDLEWARE_PORT }`);
+	const HOSTNAME = import.meta.env.VITE_HOSTNAME;
+	const socket = SocketIO(`//tv-middleware.${ HOSTNAME }`);
 
 	// State
 	const sources = ref([]);

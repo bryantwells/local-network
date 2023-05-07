@@ -11,6 +11,7 @@ import Viewer from '@/components/Viewer.vue';
 <script>
 export default {
 	name: "LibraryPage",
+    inheritAttrs: false,
     components: {
         Viewer,
     },

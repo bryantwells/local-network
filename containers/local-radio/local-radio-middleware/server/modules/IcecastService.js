@@ -72,10 +72,21 @@ export class IcecastService {
      * @param {Blob} data
      * @param {Object} metadata
      */
-    async createSource(userId, mountId, bufferLength, metadata) {
+    async createSource(userId, mountId, bufferLength, metadata, mimeType) {
 
-        // Send empty buffer to icecast
-        await this.putSourceData(userId, mountId, Buffer.alloc(10), bufferLength, metadata);
+        // Register the user
+        if (!this.getClientByUserId(userId)) {
+            this.addClient(userId, mountId, bufferLength, mimeType);
+        }
+
+        // Get the icecast client and make request
+        const client = this.getClientByUserId(userId);
+        client.putSourceData(Buffer.alloc(10));
+
+        // Update the database
+        if (!this.sourceExists(mountId)) {
+            await this.addSource(userId, mountId, metadata);
+        }
     }
 
     /**
@@ -85,20 +96,12 @@ export class IcecastService {
      * @param {Blob} data
      * @param {Object} metadata
      */
-    async putSourceData(userId, mountId, data, bufferLength, metadata) {
-
-        // Register the user
-        if (!this.getClientByUserId(userId)) {
-            this.addClient(userId, mountId, bufferLength);
-        }
+    async putSourceData(userId, mountId, data, bufferLength, metadata, mimeType) {
 
         // Get the icecast client and make request
-        const client = this.getClientByUserId(userId);
-        client.putSourceData(data);
-
-        // Update the database
-        if (!this.sourceExists(mountId)) {
-            await this.addSource(userId, mountId, metadata);
+        if (this.getClientByUserId(userId)) {
+            const client = this.getClientByUserId(userId);
+            client.putSourceData(data);
         }
     }
 
@@ -141,7 +144,7 @@ export class IcecastService {
      * Register user by creating a new icecast client
      * @param {string} userId
      */
-    addClient(userId, mountId, bufferLength) {
+    addClient(userId, mountId, bufferLength, mimeType) {
         const client = new IcecastClient(
             this.host,
             this.port,
@@ -149,7 +152,8 @@ export class IcecastService {
             this.sourceCredentials,
             userId,
             mountId,
-            bufferLength
+            bufferLength,
+            mimeType
         );
         this.clients.push(client);
     }

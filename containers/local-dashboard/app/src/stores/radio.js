@@ -5,10 +5,8 @@ import SocketIO from "socket.io-client";
 export const useRadioStore = defineStore('radio', () => {
 
 	// setup
-	const protocol = window.location.protocol;
-	const RADIO_HOSTNAME = import.meta.env.VITE_LOCAL_RADIO_HOSTNAME || 'localhost';
-	const RADIO_MIDDLEWARE_PORT = import.meta.env.VITE_LOCAL_RADIO_MIDDLEWARE_PORT || 3000;
-	const socket = SocketIO(`${ protocol }//${ RADIO_HOSTNAME }:${ RADIO_MIDDLEWARE_PORT }`);
+	const HOSTNAME = import.meta.env.VITE_HOSTNAME
+	const socket = SocketIO(`//radio-middleware.${ HOSTNAME }`);
 
 	// State
 	const sources = ref([]);

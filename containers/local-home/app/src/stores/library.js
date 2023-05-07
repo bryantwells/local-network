@@ -5,14 +5,11 @@ import axios from 'axios';
 export const useLibraryStore = defineStore('library', () => {
 
 	// setup
-	const protocol = window.location.protocol;
-	const LIBRARY_HOSTNAME = import.meta.env.VITE_LOCAL_LIBRARY_HOSTNAME || 'localhost';
-	const LIBRARY_PORT = import.meta.env.VITE_LOCAL_LIBRARY_PORT || 3000;
-	const LIBRARY_URL = `${ protocol }//${ LIBRARY_HOSTNAME }:${ LIBRARY_PORT }`;
+	const HOSTNAME = import.meta.env.VITE_HOSTNAME;
 
 	// State
 	const files = ref({});
-	const rootUrl = LIBRARY_URL;
+	const rootUrl = `//library.${ HOSTNAME }`;
 
 	// Getters
 	const latestFile = computed(() => {
@@ -24,7 +21,7 @@ export const useLibraryStore = defineStore('library', () => {
 
 	// Functions
 	function getFiles() {
-		axios.get(`${ LIBRARY_URL }/files.php`)
+		axios.get(`//library.${ HOSTNAME }/files.php`)
 			.then(response => {
 				files.value = response.data;
 			});
@@ -33,7 +30,7 @@ export const useLibraryStore = defineStore('library', () => {
 		return new Promise((resolve, reject) => {
 			const formData = new FormData();
 			formData.append('file', file);
-			axios.post(`${ LIBRARY_URL }/upload.php`, formData, {
+			axios.post(`//library.${ HOSTNAME }/upload.php`, formData, {
 					headers: { 'Content-Type': 'multipart/form-data' }
 				})
 				.then(response => {

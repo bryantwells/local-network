@@ -25,10 +25,8 @@ export default {
 	name: "RadioServiceLink",
 	computed: {
 		targetUrl() {
-			const protocol = window.location.protocol;
-			const HOME_HOSTNAME = import.meta.env.VITE_LOCAL_HOME_HOSTNAME;
-			const HOME_PORT = import.meta.env.VITE_LOCAL_HOME_PORT;
-			return `${ protocol }//${ HOME_HOSTNAME }:${ HOME_PORT }/radio`;
+			const HOSTNAME = import.meta.env.VITE_HOSTNAME;
+			return `//${ HOSTNAME }/radio`;
 		}
 	}
 }

@@ -18,7 +18,7 @@ export class IcecastClient {
      * @param {string} userId
      * @param {string} mountId
      */
-    constructor(host, port, adminCredentials, sourceCredentials, userId, mountId, bufferLength) {
+    constructor(host, port, adminCredentials, sourceCredentials, userId, mountId, bufferLength, mimeType = 'audio/ogg', sampleRate = 48000) {
 
         // Set props
         this.host = host;
@@ -28,8 +28,10 @@ export class IcecastClient {
         this.userId = userId;
         this.mountId = mountId;
         this.bufferLength = bufferLength;
+        this.mimeType = mimeType;
+        this.sampleRate = sampleRate;
         this.bufferQueue = [];
-        this.sampleRate = 48000;
+        
 
         // Init put request
         this.putRequest = null;
@@ -37,9 +39,10 @@ export class IcecastClient {
         // Put interval
         this.putIntervalId = 0;
         this.putDelay = this.bufferLength / this.sampleRate * 1000;
+        
         setTimeout(() => {
             this.putIntervalId = setInterval(() => {
-                this.makePutRequest()
+                this.makePutRequest();
             }, this.putDelay);
         }, this.putDelay * 1.25);
     }
@@ -120,6 +123,7 @@ export class IcecastClient {
      * Make put request
      */
     makePutRequest() {
+        
         if (this.bufferQueue.length > 0) {
             const data = this.bufferQueue[0];
             this.bufferQueue.shift();
@@ -137,7 +141,7 @@ export class IcecastClient {
                             'Authorization': `Basic ${this.sourceCredentials}`,
                             'Accept': '*/*',
                             'Transfer-Encoding': 'chunked',
-                            'Content-Type': 'audio/ogg',
+                            'Content-Type': this.mimeType,
                             'Ice-Public': '1',
                             'Request': '100-continue',
                             'Ice-Bitrate': '128',

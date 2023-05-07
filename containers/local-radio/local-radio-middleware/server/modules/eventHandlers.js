@@ -1,5 +1,5 @@
 import { PassThrough } from "stream";
-import { readFileSync } from "fs";
+import { readFileSync, writeFile } from "fs";
 import Ffmpeg from "fluent-ffmpeg";
 
 export default (io, icecastService) => {
@@ -12,8 +12,8 @@ export default (io, icecastService) => {
   
 	// Create Source
 	async function createSource(userId, mountId, bufferLength, metadata) {
-        await icecastService.createSource(userId, mountId, bufferLength, metadata);
-		await icecastService.createSource(`${userId}-mp3`, `${mountId}-mp3`, bufferLength, metadata);
+        await icecastService.createSource(userId, mountId, bufferLength, metadata, 'audio/ogg');
+		await icecastService.createSource(`${userId}-mp3`, `${mountId}-mp3`, bufferLength, metadata, 'audio/mp3');
         io.emit('sourceList', icecastService.getSourceList());
 		console.log('createSource', userId, mountId);
 	}
@@ -29,6 +29,7 @@ export default (io, icecastService) => {
         new Ffmpeg()
             .input(bufferStream)
             .inputFormat('s16le')
+			.inputOptions('-ar 48000')
 			.output('./buffer.ogg')
             .audioCodec('libvorbis')
             .format('ogg')
@@ -46,12 +47,15 @@ export default (io, icecastService) => {
 				// on encoding completion
                 const oggBuffer = readFileSync('./buffer.ogg');
 				const mp3Buffer = readFileSync('./buffer.mp3');
-                await icecastService.putSourceData(userId, mountId, oggBuffer, bufferLength, metadata);
-				await icecastService.putSourceData(`${userId}-mp3`, `${mountId}-mp3`, mp3Buffer, bufferLength, metadata);
+                await icecastService.putSourceData(userId, mountId, oggBuffer, bufferLength, metadata, 'audio/ogg');
+				await icecastService.putSourceData(`${userId}-mp3`, `${mountId}-mp3`, mp3Buffer, bufferLength, metadata, 'audio/mp3');
+				writeFile('./buffer.pcm', buffer, (error) => {
+					if (error) { console.log(error) }
+				});
             })
 			.run();
 	}
-
+ 
 	// Kill Source
 	async function killSource(userId, mountId, bufferLength) {
         await icecastService.killSource(userId, mountId, bufferLength);

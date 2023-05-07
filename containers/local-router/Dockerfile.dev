@@ -1,2 +1,2 @@
 # Use NGINX base image
-FROM nginx
+FROM tekn0ir/nginx-stream

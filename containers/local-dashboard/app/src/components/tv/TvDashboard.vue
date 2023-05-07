@@ -33,8 +33,8 @@ export default {
     },
     computed: {
         rtmpUrl() {
-			const LOCAL_IP = import.meta.env.VITE_LOCAL_IP;
-			return `rtmp://${ LOCAL_IP }/live`;
+			const HOSTNAME = import.meta.env.VITE_HOSTNAME;
+			return `rtmp://tv-server.${ HOSTNAME }/live`;
         }
     },
 };

@@ -61,10 +61,8 @@ export default {
 	computed: {
 		...mapState(useTvStore, ['sources', 'activeSource']),
 		src() {
-			const protocol = window.location.protocol;
-			const TV_HOSTNAME = import.meta.env.VITE_LOCAL_TV_HOSTNAME;
-			const TV_SERVER_PORT = import.meta.env.VITE_LOCAL_TV_SERVER_PORT;            
-			return `${ protocol }//${ TV_HOSTNAME }:${ TV_SERVER_PORT }/hls/${ this.activeSource.name }.m3u8`
+			const HOSTNAME = import.meta.env.VITE_HOSTNAME;
+			return `//tv-server.${ HOSTNAME }/hls/${ this.activeSource.name }.m3u8`
 		}
 	},
 	mounted() {
