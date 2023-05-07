@@ -4,8 +4,8 @@ FROM node:bullseye
 # Install sound library
 RUN apt update && \
     apt upgrade -y && \
-    apt install -y ffmpeg &&\
-    apt install -y libvorbis-dev
+    apt install -y ffmpeg
+    # apt install -y libvorbis-dev && \
 
 # Set the work directory
 WORKDIR /usr/src/local-radio-middleware

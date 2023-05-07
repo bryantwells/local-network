@@ -38,7 +38,9 @@ export class IcecastClient {
         this.putIntervalId = 0;
         this.putDelay = this.bufferLength / this.sampleRate * 1000;
         setTimeout(() => {
-            this.putIntervalId = setInterval(this.makePutRequest.bind(this), this.putDelay);
+            this.putIntervalId = setInterval(() => {
+                this.makePutRequest()
+            }, this.putDelay);
         }, this.putDelay * 1.25);
     }
 

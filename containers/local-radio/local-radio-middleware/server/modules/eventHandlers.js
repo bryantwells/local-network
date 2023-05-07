@@ -13,6 +13,7 @@ export default (io, icecastService) => {
 	// Create Source
 	async function createSource(userId, mountId, bufferLength, metadata) {
         await icecastService.createSource(userId, mountId, bufferLength, metadata);
+		await icecastService.createSource(`${userId}-mp3`, `${mountId}-mp3`, bufferLength, metadata);
         io.emit('sourceList', icecastService.getSourceList());
 		console.log('createSource', userId, mountId);
 	}
@@ -28,9 +29,12 @@ export default (io, icecastService) => {
         new Ffmpeg()
             .input(bufferStream)
             .inputFormat('s16le')
+			.output('./buffer.ogg')
             .audioCodec('libvorbis')
-			.audioFrequency(48000)
             .format('ogg')
+            .output('./buffer.mp3')
+            .audioCodec('libmp3lame')
+            .format('mp3')
             .on('error', (err) => {
 
 				// on error
@@ -39,17 +43,20 @@ export default (io, icecastService) => {
             })
             .on('end', async () => {
 
-				// on encoding completion990
-
+				// on encoding completion
                 const oggBuffer = readFileSync('./buffer.ogg');
+				const mp3Buffer = readFileSync('./buffer.mp3');
                 await icecastService.putSourceData(userId, mountId, oggBuffer, bufferLength, metadata);
+				await icecastService.putSourceData(`${userId}-mp3`, `${mountId}-mp3`, mp3Buffer, bufferLength, metadata);
             })
-            .save('./buffer.ogg');
+			.run();
 	}
 
 	// Kill Source
 	async function killSource(userId, mountId, bufferLength) {
         await icecastService.killSource(userId, mountId, bufferLength);
+		await icecastService.killSource(`${userId}-mp3`, `${mountId}-mp3`, bufferLength);
+		icecastService.killAllSources();
         io.emit('sourceList', icecastService.getSourceList());
 		console.log('killSource', userId, mountId);
 	}

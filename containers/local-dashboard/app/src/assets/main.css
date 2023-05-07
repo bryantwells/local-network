@@ -1,0 +1,16 @@
+@import './reset.css';
+@import './variables.css';
+
+html {
+	font-size: var(--font-size);
+	line-height: 1.25;
+	height: 100%;
+	background-color: black;
+	color: white;
+}
+
+body {
+	min-height: 100%;
+	display: flex;
+	flex-direction: column;
+}

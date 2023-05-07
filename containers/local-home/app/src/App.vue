@@ -1,16 +1,9 @@
+<script setup>
+import Header from '@/components/Header.vue';
+</script>
+
 <template>
-    <header 
-        class="Header">
-        <span 
-            class="Header-title">
-            Brownsville Local Network
-        </span>
-        <router-link 
-            class="Header-button Header-button--close"
-            to="/">
-            ╳
-        </router-link>
-    </header>
+    <Header />
     <main 
         class="Main">
         <router-view 
@@ -36,10 +29,6 @@ export default {
     grid-template-rows: min-content 1fr;
     gap: 0.5rem;
     padding: 0.5rem;
-}
-.Header {
-    display: flex;
-    justify-content: space-between;
 }
 .Main {
     flex: 1;

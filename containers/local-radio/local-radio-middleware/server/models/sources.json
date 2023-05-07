@@ -1,3 +1,20 @@
 {
-  "sources": []
+  "sources": [
+    {
+      "userId": "nsxzx4x4",
+      "mountId": "local-radio",
+      "metadata": {
+        "title": "",
+        "description": ""
+      }
+    },
+    {
+      "userId": "nsxzx4x4-mp3",
+      "mountId": "local-radio-mp3",
+      "metadata": {
+        "title": "",
+        "description": ""
+      }
+    }
+  ]
 }

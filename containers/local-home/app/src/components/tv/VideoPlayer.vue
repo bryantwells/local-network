@@ -1,20 +1,26 @@
 <script setup>
-    import Hls from 'hls.js/dist/hls.min';
+import { mapState } from 'pinia';
+import { useTvStore } from '@/stores/tv';
+import Hls from 'hls.js/dist/hls.min';
 </script>
 
 <template>
 	<div class="VideoPlayer"
 		:class="{
+			'VideoPlayer--preview': isPreview,
 			'is-loaded': isLoaded,
 			'is-playing': isPlaying,
 		}">
 		<video 
 			class="VideoPlayer-video"
 			ref="video"
-			muted
-			autoplay
+			:muted="isPreview"
+			:autoplay="isPreview"
+			:playsinline="isPreview"
 		/>
-		<div class="VideoPlayer-controls">
+		<div 	
+			v-if="!isPreview"
+			class="VideoPlayer-controls">
 			<div
 				v-if="isPlaying"
 				class="VideoPlayer-button VideoPlayer-button--pause"
@@ -47,13 +53,18 @@ export default {
 	},
 	props: {
 		sourceData: Object,
+		isPreview: {
+			default: true,
+			type: Boolean
+		},
 	},
 	computed: {
+		...mapState(useTvStore, ['sources', 'activeSource']),
 		src() {
-			const SERVER_PORT = import.meta.env.VITE_LOCAL_TV_SERVER_PORT;
 			const protocol = window.location.protocol;
-            const hostname = window.location.hostname;
-			return `${ protocol }//${ hostname }:${ SERVER_PORT }/hls/${ this.sourceData.name }.m3u8`
+			const TV_HOSTNAME = import.meta.env.VITE_LOCAL_TV_HOSTNAME;
+			const TV_SERVER_PORT = import.meta.env.VITE_LOCAL_TV_SERVER_PORT;            
+			return `${ protocol }//${ TV_HOSTNAME }:${ TV_SERVER_PORT }/hls/${ this.activeSource.name }.m3u8`
 		}
 	},
 	mounted() {
@@ -77,6 +88,8 @@ export default {
 				const hls = new Hls();
 				hls.loadSource(this.src);
 				hls.attachMedia(this.$refs['video']);
+			} else if (this.$refs['video'].canPlayType('application/vnd.apple.mpegurl')) {
+				this.$refs['video'].src = this.src;
 			}
 		},
 		play() {
@@ -88,7 +101,12 @@ export default {
 			this.isPlaying = false;
 		},
 		fullscreen() {
-			this.$refs['video'].requestFullscreen();
+			if (this.$refs['video'].webkitEnterFullScreen) {
+				this.$refs['video'].webkitEnterFullScreen();
+			} else {
+				this.$refs['video'].requestFullscreen();
+			}
+			
 		},
 	},
 }
@@ -96,17 +114,21 @@ export default {
 
 <style>
 .VideoPlayer {
-	position: relative;
-	background: black;
+	position: absolute;
+	top: 0; left: 0;
+	width: 100%;
+	height: 100%;
+	border-radius: var(--border-radius);
+	overflow: hidden;
 }
 .VideoPlayer-video {
-	/* opacity: 0.5; */
 	width: 100%;
-	max-height: calc(100vh - 6rem);
+	height: 100%;
 	object-fit: contain;
+	object-position: center;
 }
-.VideoPlayer.is-playing .VideoPlayer-video {
-	opacity: 1;
+.VideoPlayer--preview .VideoPlayer-video {
+	object-fit: cover;
 }
 .VideoPlayer-controls {
 	position: absolute;
@@ -115,7 +137,6 @@ export default {
 	right: 0;
 	display: flex;
 	justify-content: space-between;
-	display: none;
 }
 .VideoPlayer.is-playing .VideoPlayer-controls {
 	opacity: 0;
@@ -126,6 +147,6 @@ export default {
 .VideoPlayer-button {
 	color: white;
 	cursor: pointer;
-	padding: 1rem;
+	padding: var(--space-sm);
 }
 </style>

@@ -1,0 +1,9 @@
+:root {
+	--font-size: 30px;
+	--color-radio: rgb(255,0,0);
+	--color-tv: rgb(0,255,0);
+	--color-library: rgb(0,0,255);
+	--space-sm: 0.5rem;
+	--border-radius: 0.5rem;
+}
+

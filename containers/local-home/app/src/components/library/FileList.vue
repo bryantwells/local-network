@@ -24,11 +24,6 @@ import { useLibraryStore } from '@/stores/library';
 				</li>
 			</ul>
 		</div>
-		<router-link
-			to="/dashboard/library"
-			class="FileList-button">
-			Upload To The Archive
-		</router-link>
 	</div>
 	
 </template>
@@ -51,7 +46,6 @@ export default {
 .FileList-header {
 	margin: 0.5rem 0 1rem 0;
 	font-family: monospace;
-	color: white;
 }
 .FileList-container {
 	flex: 1;
@@ -79,13 +73,7 @@ export default {
 	padding: 0.25rem 0;
 	display: block;
 }
-.FileList-button {
-    background-color: black;
-    color: white;
-    padding: 0.5rem;
-    border-radius: 0.5rem;
-    text-align: center;
-	display: block;
+.FileList .Button {
 	margin-top: 0.5rem;
 	position: sticky;
 	bottom: 0.5rem;

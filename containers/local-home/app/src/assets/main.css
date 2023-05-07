@@ -1,7 +1,8 @@
 @import './reset.css';
+@import './variables.css';
 
 html {
-	font-size: 30px;
+	font-size: var(--font-size);
 	line-height: 1.25;
 	height: 100%;
 }

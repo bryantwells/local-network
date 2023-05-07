@@ -1,39 +1,48 @@
-import Home from '@/views/Home.vue';
-import RadioPage from '@/views/Radio.vue';
-import RadioDashboardPage from '@/views/dashboard/RadioDashboard.vue';
-import TvPage from '@/views/Tv.vue';
-import LibraryPage from '@/views/Library.vue';
-import LibraryDashboardPage from '@/views/dashboard/LibraryDashboard.vue'
+import HomePage from '@/views/HomePage.vue';
+import RadioPage from '@/views/RadioPage.vue';
+import TvPage from '@/views/TvPage.vue';
+import LibraryPage from '@/views/LibraryPage.vue';
+import InfoPage from '@/views/InfoPage.vue';
 
 export default [
     {
         path: '/',
-        name: 'Home',
-        component: Home,
+        name: 'HomePage',
+        component: HomePage,
+        meta: {
+            title: 'Brownsville Local Network',
+        }
     },
     {
         path: '/radio',
-        name: 'Local Radio',
+        name: 'RadioPage',
         component: RadioPage,
-    },
-    {
-        path: '/dashboard/radio',
-        name: 'Local Radio Dashboard',
-        component: RadioDashboardPage,
+        meta: {
+            title: 'BLN: Local Radio',
+        }
     },
     {
         path: '/tv',
-        name: 'Local TV',
+        name: 'TvPage',
         component: TvPage,
+        meta: {
+            title: 'BLN: Local TV',
+        }
     },
     {
         path: '/library',
-        name: 'Local Library',
+        name: 'LibraryPage',
         component: LibraryPage,
+        meta: {
+            title: 'BLN: Local Library',
+        }
     },
     {
-        path: '/dashboard/library',
-        name: 'Library Dashboard',
-        component: LibraryDashboardPage,
+        path: '/info',
+        name: 'InfoPage',
+        component: InfoPage,
+        meta: {
+            title: 'Brownsville Local Network',
+        }
     },
 ];
