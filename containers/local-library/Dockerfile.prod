@@ -1,0 +1,9 @@
+# Use NGINX base image
+FROM trafex/php-nginx
+
+# Copy config
+COPY ./config/nginx.conf /etc/nginx/conf.d/default.conf
+COPY ./config/php.ini /etc/php81/conf.d/settings.ini
+
+# Copy HTML
+COPY ./html /var/www/html

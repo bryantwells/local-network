@@ -1,5 +1,6 @@
 # Use NGINX base image
 FROM tiangolo/nginx-rtmp
 
+# Make directories
 RUN mkdir /tmp/hls && \
 	mkdir /tmp/dash

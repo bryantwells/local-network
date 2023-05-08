@@ -3,10 +3,9 @@ version: "3.9"
 services:
 
   # Home
-  # --------------------------------
-
   home:
     container_name: local-home
+    restart: unless-stopped
     build:
       context: ./containers/local-home
       dockerfile: Dockerfile.dev
@@ -19,10 +18,9 @@ services:
       - ./containers/local-home/app/vite.config.js:/usr/src/local-home-app/vite.config.js
 
   # Dashboard
-  # --------------------------------
-
   dashboard:
     container_name: local-dashboard
+    restart: unless-stopped
     build:
       context: ./containers/local-dashboard
       dockerfile: Dockerfile.dev
@@ -34,18 +32,7 @@ services:
       - ./containers/local-dashboard/app/index.html:/usr/src/local-dashboard-app/index.html
       - ./containers/local-dashboard/app/vite.config.js:/usr/src/local-dashboard-app/vite.config.js
 
-  # Radio
-  # --------------------------------
-
-  radio-server:
-    container_name: local-radio-server
-    restart: unless-stopped
-    build:
-      context: ./containers/local-radio/local-radio-server
-      dockerfile: Dockerfile.dev
-    volumes:
-      - ./containers/local-radio/local-radio-server/config/icecast.xml:/etc/icecast2/icecast.xml
-
+  # Radio Middleware
   radio-middleware:
     container_name: local-radio-middleware
     restart: unless-stopped
@@ -57,20 +44,20 @@ services:
       - ./containers/local-radio/local-radio-middleware/server/models:/usr/src/local-radio-middleware/models
       - ./containers/local-radio/local-radio-middleware/server/modules:/usr/src/local-radio-middleware/modules
 
-  # TV
-  # --------------------------------
-
-  tv-server:
-    container_name: local-tv-server
-    build: 
-      context: ./containers/local-tv/local-tv-server
+  # Radio Server
+  radio-server:
+    container_name: local-radio-server
+    restart: unless-stopped
+    build:
+      context: ./containers/local-radio/local-radio-server
       dockerfile: Dockerfile.dev
     volumes:
-      - ./containers/local-tv/local-tv-server/config/nginx.conf:/etc/nginx/nginx.conf
-      - ./containers/local-tv/local-tv-server/config/stat.xsl:/var/www/html/stat.xsl
+      - ./containers/local-radio/local-radio-server/config/icecast.xml:/etc/icecast2/icecast.xml
 
+  # TV Middleware
   tv-middleware:
     container_name: local-tv-middleware
+    restart: unless-stopped
     build:
       context: ./containers/local-tv/local-tv-middleware
       dockerfile: Dockerfile.dev
@@ -78,9 +65,18 @@ services:
       - ./containers/local-tv/local-tv-middleware/server/index.js:/usr/src/local-tv-middleware/index.js
       - ./containers/local-tv/local-tv-middleware/server/models:/usr/src/local-tv-middleware/models
 
-  # Library
-  # --------------------------------
+  # TV Server
+  tv-server:
+    container_name: local-tv-server
+    restart: unless-stopped
+    build: 
+      context: ./containers/local-tv/local-tv-server
+      dockerfile: Dockerfile.dev
+    volumes:
+      - ./containers/local-tv/local-tv-server/config/nginx.conf:/etc/nginx/nginx.conf
+      - ./containers/local-tv/local-tv-server/config/stat.xsl:/var/www/html/stat.xsl
 
+  # Library
   library:
     container_name: local-library
     restart: unless-stopped
@@ -93,10 +89,7 @@ services:
       - ./containers/local-library/files:/var/www/files
       - ./containers/local-library/html:/var/www/html
 
-
   # Router
-  # --------------------------------
-
   router:
     container_name: local-router
     restart: unless-stopped

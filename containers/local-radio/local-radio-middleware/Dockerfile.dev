@@ -5,12 +5,12 @@ FROM node:bullseye
 RUN apt update && \
     apt upgrade -y && \
     apt install -y ffmpeg
-    # apt install -y libvorbis-dev && \
 
 # Set the work directory
 WORKDIR /usr/src/local-radio-middleware
 
-COPY ./server/package.json /usr/src/local-radio-middleware/package.json
+# copy both 'package.json' and 'package-lock.json' (if available)
+COPY ./server/package*.json ./
 
 # Install dependencies
 RUN npm install

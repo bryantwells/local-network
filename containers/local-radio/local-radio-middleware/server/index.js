@@ -36,6 +36,7 @@ icecastService.killAllSources();
 const io = new Server(server, { cors: { origin: '*' } });
 const { getSources, createSource, putSourceData, killSource } = eventHandlers(io, icecastService);
 io.on('connection', (socket) => {
+    console.log('connection');
     socket.emit('sourceList', icecastService.getSourceList());
     socket.on('getSources', getSources);
     socket.on('createSource', createSource);
@@ -43,5 +44,10 @@ io.on('connection', (socket) => {
     socket.on('killSource', killSource);
 });
 
+app.get('/', (request, response) => {
+    response.send('Hello World from Radio!');
+})
+
 // Mount
 server.listen(3000);
+console.log('server listening on :3000');

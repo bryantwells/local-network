@@ -36,6 +36,10 @@ const io = new Server(server, {
 	cors: { origin: '*' },
 });
 
+app.get('/', (request, response) => {
+    response.send('Hello World from Tv!');
+})
+
 // Handle GET reqquest
 app.get('/stats', (request, response) => {
 
@@ -88,11 +92,10 @@ app.post('/done', (request, response) => {
 // Handle socket events
 io.on('connection', (socket) => {
 
-	console.log('connected');
-
 	// Send stats to client
     socket.emit('sourceList', db.data.sources);
 });
 
 // Mount server
 server.listen(3000);
+console.log('server listening on :3000');

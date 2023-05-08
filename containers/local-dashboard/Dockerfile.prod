@@ -1,6 +1,9 @@
 # Use Node base image
 FROM node:bullseye
 
+# install simple http server for serving static content
+RUN npm install -g http-server
+
 # Set the work directory
 WORKDIR /usr/src/local-dashboard-app
 
@@ -8,7 +11,13 @@ WORKDIR /usr/src/local-dashboard-app
 COPY ./app/package*.json ./
 
 # Install dependencies
-RUN npm install
+RUN npm ci
+
+# Copy files
+COPY ./app ./
+
+# Build
+RUN npm run build
 
 # Run the app
-CMD npm run dev
+CMD ["http-server", "--cors", "-p 8080", "./dist"]

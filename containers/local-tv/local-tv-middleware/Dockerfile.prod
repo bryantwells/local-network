@@ -8,7 +8,10 @@ WORKDIR /usr/src/local-tv-middleware
 COPY ./server/package*.json ./
 
 # Install dependencies
-RUN npm install
+RUN npm ci
+
+# Copy files
+COPY ./server ./
 
 # Run the app
-CMD npm run dev
+CMD [ "node", "index.js" ]

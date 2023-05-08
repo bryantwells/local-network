@@ -1,14 +1,22 @@
 # Use Node base image
 FROM node:bullseye
 
+# Install sound library
+RUN apt update && \
+    apt upgrade -y && \
+    apt install -y ffmpeg
+
 # Set the work directory
-WORKDIR /usr/src/local-tv-middleware
+WORKDIR /usr/src/local-radio-middleware
 
 # copy both 'package.json' and 'package-lock.json' (if available)
 COPY ./server/package*.json ./
 
 # Install dependencies
-RUN npm install
+RUN npm ci
+
+# Copy files
+COPY ./server ./
 
 # Run the app
-CMD npm run dev
+CMD [ "node", "index.js" ]
