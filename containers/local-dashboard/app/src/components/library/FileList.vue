@@ -88,6 +88,8 @@ export default {
 .FileList-link {
 	padding: 0.25rem 0;
 	display: block;
+	max-width: calc(100vw - var(--space-sm) * 4);
+    overflow: hidden;
 }
 .FileList .Button {
 	margin-top: 0.5rem;

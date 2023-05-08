@@ -1,6 +1,8 @@
 # Use Node base image
 FROM node:bullseye
 
+ARG VITE_HOSTNAME
+
 # install simple http server for serving static content
 RUN npm install -g http-server
 
@@ -20,4 +22,4 @@ COPY ./app ./
 RUN npm run build
 
 # Run the app
-CMD ["http-server", "--cors", "-p 8080", "./dist"]
+CMD ["http-server", "--cors", "-p 3000", "./dist"]

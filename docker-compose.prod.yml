@@ -9,8 +9,9 @@ services:
     build:
       context: ./containers/local-home
       dockerfile: Dockerfile.prod
-    environment:
-      - VITE_HOSTNAME=$HOSTNAME
+      args: 
+        - VITE_HOSTNAME=$HOSTNAME
+
 
   # Dashboard
   dashboard:
@@ -19,8 +20,8 @@ services:
     build:
       context: ./containers/local-dashboard
       dockerfile: Dockerfile.prod
-    environment:
-      - VITE_HOSTNAME=$HOSTNAME
+      args: 
+        - VITE_HOSTNAME=$HOSTNAME
 
   # Radio Middleware
   radio-middleware:
