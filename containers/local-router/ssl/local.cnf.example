@@ -1,0 +1,29 @@
+FQDN=mydomain.ending
+
+[req]
+default_bits = 2048
+default_md = sha256
+distinguished_name = req_distinguished_name
+x509_extensions = v3_req
+prompt = no
+
+[req_distinguished_name]
+C = US
+ST = NY
+L = Brooklyn
+O = PiggyBack
+CN = ${ENV::FQDN}
+
+[v3_req]
+keyUsage = digitalSignature, keyEncipherment
+extendedKeyUsage = serverAuth
+subjectAltName = @alt_names
+
+[alt_names]
+DNS.1 = ${ENV::FQDN}
+DNS.2 = dashboard.${ENV::FQDN}
+DNS.3 = radio-server.${ENV::FQDN}
+DNS.4 = radio-middleware.${ENV::FQDN}
+DNS.5 = tv-server.${ENV::FQDN}
+DNS.6 = tv-middleware.${ENV::FQDN}
+DNS.7 = library.${ENV::FQDN}
