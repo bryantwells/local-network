@@ -105,4 +105,4 @@ services:
       - ./containers/local-router/config/http.conf:/opt/nginx/http.conf.d/default.conf
       - ./containers/local-router/config/stream.conf:/opt/nginx/stream.conf.d/default.conf
       - ./containers/local-router/config/includes/proxy.conf:/opt/nginx/includes/proxy.conf
-      - ./ssl/cert:/opt/nginx/ssl
+      - ./containers/local-router/ssl/cert:/opt/nginx/ssl
