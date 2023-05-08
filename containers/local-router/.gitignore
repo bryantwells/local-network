@@ -1,2 +1,2 @@
-ssl/cert
-san.cnf
+ssl/local-cert
+local.cnf
