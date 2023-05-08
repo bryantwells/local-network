@@ -4,8 +4,7 @@ FROM node:bullseye
 # Install sound library
 RUN apt update && \
     apt upgrade -y && \
-    apt install -y ffmpeg \
-    apt install -y libasound2-dev
+    apt install -y ffmpeg
 
 # Set the work directory
 WORKDIR /usr/src/local-radio-middleware

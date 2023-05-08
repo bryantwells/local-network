@@ -12,7 +12,6 @@ services:
       args: 
         - VITE_HOSTNAME=$HOSTNAME
 
-
   # Dashboard
   dashboard:
     container_name: local-dashboard
@@ -35,9 +34,6 @@ services:
   radio-server:
     container_name: local-radio-server
     restart: unless-stopped
-    privileged: true
-    devices:
-      - "/dev/snd:/dev/snd"
     build:
       context: ./containers/local-radio/local-radio-server
       dockerfile: Dockerfile.prod

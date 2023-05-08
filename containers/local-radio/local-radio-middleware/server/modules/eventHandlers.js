@@ -1,13 +1,6 @@
 import { PassThrough } from "stream";
 import { readFileSync, writeFile } from "fs";
 import Ffmpeg from "fluent-ffmpeg";
-import Speaker from "speaker";
-
-const speaker = new Speaker({
-	channels: 1,
-	bitDepth: 16,
-	sampleRate: 48000,
-})
 
 export default (io, icecastService) => {
 
@@ -31,9 +24,6 @@ export default (io, icecastService) => {
 		// create strea
 		const bufferStream = new PassThrough();
         bufferStream.end(buffer);
-
-		// send PCM data to speaker
-		bufferStream.pipe(speaker);
 
 		// ffmpeg encoding
         new Ffmpeg()
