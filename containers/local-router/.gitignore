@@ -1,2 +1,2 @@
-ssl/local-cert
+ssl/local-cert/*
 local.cnf
