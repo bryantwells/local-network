@@ -53,12 +53,15 @@ export default {
 			encoderWorker: null,
             encoderProcessorNode: null,
             buffer: [],
-            targetBufferLength: 48000 * 3,
+            sampleRate: 48000,
         };
     },
     computed: {
         /* Store Actions */
         ...mapState(useRadioStore, ['sources']),
+        targetBufferLength() {
+            return this.sampleRate * 3;
+        }
     },
 	mounted() {
 		this.initContext();
@@ -111,6 +114,7 @@ export default {
             });
             this.encoderWorker.addEventListener('message', (e) => {
                 if (e.data.cmd == 'end') {
+                    console.log(this.targetBufferLength, e.data.payload);
                     this.putSourceData(this.userId, this.mountId, e.data.payload, this.targetBufferLength, this.metadata);
                 }
             });
@@ -134,6 +138,7 @@ export default {
 
 					// Start audio context
 					this.context.resume();
+                    this.sampleRate = this.context.sampleRate;
 
 					// Setup source node (microphone)
                     this.sourceNode = this.context.createMediaStreamSource(stream);
