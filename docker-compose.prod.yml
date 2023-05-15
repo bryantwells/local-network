@@ -71,7 +71,18 @@ services:
     build: 
       context: ./containers/local-router
       dockerfile: Dockerfile.prod
+    volumes:
+      - ./ssl/prod/www:/var/www/certbot/:ro
+      - ./ssl/prod/cert:/etc/nginx/ssl/:ro
     ports: 
       - 80:80
       - 443:443
-      - 1935:1935  
+      - 1935:1935
+
+  # Certbot
+  certbot:
+    container_name: certbot
+    image: certbot/certbot
+    volumes:
+      - ./ssl/prod/www:/var/www/certbot/:rw
+      - ./ssl/prod/cert:/etc/nginx/ssl/:rw

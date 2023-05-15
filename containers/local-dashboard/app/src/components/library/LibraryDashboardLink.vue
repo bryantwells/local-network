@@ -1,7 +1,7 @@
 <script setup>
-	import { mapState } from 'pinia';
-	import { useLibraryStore } from '@/stores/library';
-	import Button from '@/components/Button.vue';
+import { mapState } from 'pinia';
+import { useLibraryStore } from '@/stores/library';
+import Button from '@/components/Button.vue';
 </script>
 
 <template>
@@ -10,10 +10,10 @@
 		to="/library">
 		<div 
 			class="DashboardLink-title">
-			Local Library is hosting {{ totalSizeInMb }}mb of community media.
+			Local Archive is hosting {{ totalSizeInMb }}mb of community media.
 		</div>
 		<Button
-			label="Upload Media"
+			label="View The Archive"
 			style="
 				--color: var(--color-library);
 			"

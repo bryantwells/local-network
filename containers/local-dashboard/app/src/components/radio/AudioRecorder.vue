@@ -114,7 +114,7 @@ export default {
             });
             this.encoderWorker.addEventListener('message', (e) => {
                 if (e.data.cmd == 'end') {
-                    console.log(this.targetBufferLength, e.data.payload);
+                    // console.log(this.targetBufferLength, e.data.payload);
                     this.putSourceData(this.userId, this.mountId, e.data.payload, this.targetBufferLength, this.metadata);
                 }
             });

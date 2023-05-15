@@ -1,7 +1,6 @@
 <script setup>
-	import { mapState } from 'pinia';
-	import { useLibraryStore } from '@/stores/library';
-	import Button from '@/components/Button.vue';
+import { mapState } from 'pinia';
+import { useLibraryStore } from '@/stores/library';
 </script>
 
 
@@ -14,7 +13,7 @@
 		}">
 		<div 
 			class="ViewerLink-title">
-			Local Library
+			Local Archive
 		</div>
 		<div 
 			class="ViewerLink-subTitle">

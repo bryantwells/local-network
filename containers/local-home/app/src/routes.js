@@ -34,7 +34,7 @@ export default [
         name: 'LibraryPage',
         component: LibraryPage,
         meta: {
-            title: 'BLN: Local Library',
+            title: 'BLN: Local Archive',
         }
     },
     {

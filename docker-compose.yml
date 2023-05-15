@@ -103,7 +103,7 @@ services:
       - 80:80
     volumes:
       - ./containers/local-router/config/nginx.conf:/opt/nginx/nginx.conf
-      - ./containers/local-router/config/http.conf:/opt/nginx/http.conf.d/default.conf
+      - ./containers/local-router/config/http.dev.conf:/opt/nginx/http.conf.d/default.conf
       - ./containers/local-router/config/stream.conf:/opt/nginx/stream.conf.d/default.conf
       - ./containers/local-router/config/includes/proxy.conf:/opt/nginx/includes/proxy.conf
-      - ./containers/local-router/ssl/local-cert:/opt/nginx/ssl
+      - ./ssl/dev/cert:/opt/nginx/ssl

@@ -34,7 +34,7 @@ export default [
         name: 'LibraryIndexPage',
         component: LibraryIndexPage,
         meta: {
-            title: 'BLN Dashboard: Local Library',
+            title: 'BLN Dashboard: Local Archive',
         }
     },
     {
@@ -42,7 +42,7 @@ export default [
         name: 'LibraryDashboardPage',
         component: LibraryDashboardPage,
         meta: {
-            title: 'BLN Dashboard: Local Library',
+            title: 'BLN Dashboard: Local Archive',
         }
     },
 ];
