@@ -32,18 +32,22 @@ export default class SpeakerStream {
 
 	appendBuffer(buffer) {
 		this.bufferQueue.push(buffer);
+		console.log('append to speaker stram buffer');
 	}
 
 	activateStream() {
+		console.log('activate speaker stream');
 		setTimeout(() => {
 			this.bufferIntervalId = setInterval(() => {
 				this.stream.push(this.bufferQueue[0]);
 				this.bufferQueue.shift();
+				console.log('speaker', this.bufferQueue[0].length);
 			}, this.bufferInterval);
 		}, this.bufferInterval * 1.5);
 	}
 
 	deactivateStream() {
+		console.log('deactivate speaker stream');
 		if (this.bufferIntervalId) {
 			clearInterval(this.bufferIntervalId);
 		}
