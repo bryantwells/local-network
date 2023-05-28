@@ -4,7 +4,7 @@ import Speaker from "speaker";
 export default class SpeakerStream {
 	constructor() {
 		this.speaker = new Speaker({
-			channels: 2,          // 2 channels
+			channels: 1,          // 2 channels
 			bitDepth: 16,         // 16-bit samples
 			sampleRate: 48000,     // 44,100 Hz sample rate
 			device: 'hw:0,0',
@@ -42,7 +42,7 @@ export default class SpeakerStream {
 		this.bufferIntervalId = setInterval(() => {
 			this.stream.push(this.bufferQueue[0]);
 			this.bufferQueue.shift();
-			console.log('speaker', this.bufferQueue[0].length);
+			console.log('speaker', this.bufferQueue[0]);
 		}, this.bufferInterval);
 	}
 
