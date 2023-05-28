@@ -10,16 +10,14 @@ const init = (bufferLength) => {
 
 // Append
 const append = (data) => {
-    
 
     // append data to buffer
     dataBuffer = [...dataBuffer, ...data];
     
-
     // check buffer length
     if (dataBuffer.length > targetLength) {
 
-        // create float array from first chunk in buffer        
+        // create float array from first chunk in buffer
         const floatPayload = new Float32Array(dataBuffer.splice(0, targetLength));
 
         // convert float array to int
