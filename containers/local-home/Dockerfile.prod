@@ -22,4 +22,4 @@ COPY ./app ./
 RUN npm run build
 
 # Run the app
-CMD ["http-server", "--cors", "-p", "3000", "http://localhost:3000?", "./dist"]
+CMD ["http-server", "./dist", "--cors", "-p", "3000", "http://localhost:3000?"]
