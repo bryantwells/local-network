@@ -45,7 +45,8 @@ export default (io, icecastService) => {
             .audioCodec('libmp3lame')
             .format('mp3')
 			.output('./buffer.raw')
-			.outputOptions('-ac 2 -f s16le -c:a pcm_s16le')
+			.audioChannels(2)
+			.format('s16le')
             .on('error', (err) => {
 
 				// on error
