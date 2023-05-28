@@ -1,6 +1,18 @@
 import { PassThrough } from "stream";
 import { readFileSync, writeFile } from "fs";
 import Ffmpeg from "fluent-ffmpeg";
+import Speaker from "speaker";
+
+const PIPE_AUDIO = process.env.PIPE_AUDIO;
+console.log('PIPE_AUDIO: ', PIPE_AUDIO);
+
+if (PIPE_AUDIO) {
+	const speaker = new Speaker({
+		channels: 2,          // 2 channels
+		bitDepth: 16,         // 16-bit samples
+		sampleRate: 48000     // 44,100 Hz sample rate
+	});
+}
 
 export default (io, icecastService) => {
 

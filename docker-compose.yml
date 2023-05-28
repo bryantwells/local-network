@@ -40,6 +40,10 @@ services:
     build:
       context: ./containers/local-radio/local-radio-middleware
       dockerfile: Dockerfile.dev
+    environment:
+      - PIPE_AUDIO=$PIPE_AUDIO
+    devices:
+      - '/dev/snd:/dev/snd'
     volumes:
       - ./containers/local-radio/local-radio-middleware/server/index.js:/usr/src/local-radio-middleware/index.js
       - ./containers/local-radio/local-radio-middleware/server/models:/usr/src/local-radio-middleware/models
