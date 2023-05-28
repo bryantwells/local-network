@@ -61,12 +61,7 @@ export default (io, icecastService) => {
 				const rawBuffer = readFileSync('./buffer.raw');
                 await icecastService.putSourceData(userId, mountId, oggBuffer, bufferLength, metadata, 'audio/ogg');
 				await icecastService.putSourceData(`${userId}-mp3`, `${mountId}-mp3`, mp3Buffer, bufferLength, metadata, 'audio/mp3');
-				if (PIPE_AUDIO) {
-					speakerStream.appendBuffer(rawBuffer);
-				}
-				writeFile('./buffer.pcm', buffer, (error) => {
-					if (error) { console.log(error) }
-				});
+				if (PIPE_AUDIO) { speakerStream.appendBuffer(rawBuffer); }
             })
 			.run();
 	}

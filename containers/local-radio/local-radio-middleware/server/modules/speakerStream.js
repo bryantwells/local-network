@@ -22,35 +22,20 @@ export default class SpeakerStream {
 		// Put interval
         this.bufferIntervalId = null;
         this.bufferInterval = this.bufferLength / this.sampleRate * 1000;
-		setInterval(() => {
-			console.log('bufferQueue.length:', this.bufferQueue.length);
-			console.log('bufferIntervalId:', !this.bufferIntervalId)
-			if (this.bufferQueue.length > 1 && !this.bufferIntervalId) {
-				this.activateStream();
-			} else if (!this.bufferQueue.length && this.bufferIntervalId) {
-				this.deactivateStream();
-			}
-		}, this.bufferInterval);
 	}
 
 	appendBuffer(buffer) {
 		this.bufferQueue.push(buffer);
-		console.log('append to speaker stream buffer');
-	}
-
-	activateStream() {
-		console.log('activate speaker stream');
-		this.bufferIntervalId = setInterval(() => {
-			this.stream.push(this.bufferQueue[0]);
-			this.bufferQueue.shift();
-			console.log('speaker', this.bufferQueue[0]);
-		}, this.bufferInterval);
-	}
-
-	deactivateStream() {
-		if (this.bufferIntervalId) {
-			console.log('deactivate speaker stream');
-			clearInterval(this.bufferIntervalId);
+		console.log('speaker', buffer);
+		if (this.bufferQueue.length > 1 && !this.bufferIntervalId) {
+			this.bufferIntervalId = setInterval(() => {
+				if (this.bufferQueue.length) {
+					this.stream.push(this.bufferQueue[0]);
+					this.bufferQueue.shift();
+				} else {
+					clearInterval(this.bufferIntervalId);
+				}
+			},  this.bufferLength / this.sampleRate * 1000);
 		}
 	}
 }
