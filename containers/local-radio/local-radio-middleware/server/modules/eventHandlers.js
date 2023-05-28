@@ -44,7 +44,6 @@ export default (io, icecastService) => {
 			const speakerStream = new Readable.from(buffer);
 			bufferStream.pipe(speakerStream);
 			console.log('speaker', buffer);
-			speakerStream.destroy();
 		}
 
 		// ffmpeg encoding
