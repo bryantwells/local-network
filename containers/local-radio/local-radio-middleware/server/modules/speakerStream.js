@@ -1,3 +1,4 @@
+import { Readable } from "stream";
 import Speaker from "speaker";
 
 export default class SpeakerStream {

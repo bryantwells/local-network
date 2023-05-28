@@ -1,4 +1,4 @@
-import { PassThrough, Readable } from "stream";
+import { PassThrough } from "stream";
 import { readFileSync, writeFile } from "fs";
 import Ffmpeg from "fluent-ffmpeg";
 import SpeakerStream from "./speakerStream.js";
