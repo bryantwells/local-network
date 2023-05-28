@@ -7,11 +7,11 @@ export default class SpeakerStream {
 			channels: 2,          // 2 channels
 			bitDepth: 16,         // 16-bit samples
 			signed: true,
-			sampleRate: 44100,     // 44,100 Hz sample rate
+			sampleRate: 48000 / 2,     // 44,100 Hz sample rate
 			device: 'hw:0,0',
 		});
 		this.bufferLength = 144000;
-		this.sampleRate = 44100;
+		this.sampleRate = 48000;
 		this.bufferQueue = [];
 
 		// create stream
