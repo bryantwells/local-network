@@ -7,7 +7,7 @@ export default class SpeakerStream {
 			channels: 2,          // 2 channels
 			bitDepth: 16,         // 16-bit samples
 			signed: true,
-			sampleRate: 48000 / 2,     // 44,100 Hz sample rate
+			sampleRate: 48000,     // 44,100 Hz sample rate
 			device: 'hw:0,0',
 		});
 		this.bufferLength = 144000;
@@ -25,7 +25,7 @@ export default class SpeakerStream {
 		setInterval(() => {
 			console.log('bufferQueue.length:', this.bufferQueue.length);
 			console.log('bufferIntervalId:', !this.bufferIntervalId)
-			if (this.bufferQueue.length > 2 && !this.bufferIntervalId) {
+			if (this.bufferQueue.length > 1 && !this.bufferIntervalId) {
 				this.activateStream();
 			} else if (!this.bufferQueue.length && this.bufferIntervalId) {
 				this.deactivateStream();
@@ -34,7 +34,12 @@ export default class SpeakerStream {
 	}
 
 	appendBuffer(buffer) {
-		this.bufferQueue.push(buffer);
+		let stereoBuffer = [];
+		[...buffer].forEach(val => {
+			stereoBuffer.push(val, val);
+		});
+		stereoBuffer = Buffer.from(stereoBuffer);
+		this.bufferQueue.push(stereoBuffer);
 		console.log('append to speaker stream buffer');
 	}
 
