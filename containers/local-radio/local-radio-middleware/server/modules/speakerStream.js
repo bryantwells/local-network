@@ -22,6 +22,8 @@ export default class SpeakerStream {
         this.bufferIntervalId = null;
         this.bufferInterval = this.bufferLength / this.sampleRate * 1000;
 		setInterval(() => {
+			console.log('bufferQueue.length:', this.bufferQueue.length);
+			console.log('bufferIntervalId:', !this.bufferIntervalId)
 			if (this.bufferQueue > 0 && !this.bufferIntervalId) {
 				this.activateStream();
 			} else {
@@ -47,8 +49,8 @@ export default class SpeakerStream {
 	}
 
 	deactivateStream() {
-		console.log('deactivate speaker stream');
 		if (this.bufferIntervalId) {
+			console.log('deactivate speaker stream');
 			clearInterval(this.bufferIntervalId);
 		}
 	}

@@ -157,7 +157,7 @@ export class IcecastClient {
                 console.log('put', data.length);
             } else {
                 this.putRequest.write(data);
-                console.log('write', data.length);
+                console.log('write', data);
             }
         }
     }
