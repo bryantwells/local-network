@@ -3,6 +3,6 @@ FROM tekn0ir/nginx-stream
 
 # Copy config
 COPY ./config/nginx.conf /opt/nginx/nginx.conf
-COPY ./config/http.conf /opt/nginx/http.conf.d/default.conf
+COPY ./config/http.prod.conf /opt/nginx/http.conf.d/default.conf
 COPY ./config/stream.conf /opt/nginx/stream.conf.d/default.conf
 COPY ./config/includes/proxy.conf /opt/nginx/includes/proxy.conf

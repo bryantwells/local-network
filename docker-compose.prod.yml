@@ -73,7 +73,7 @@ services:
       dockerfile: Dockerfile.prod
     volumes:
       - ./ssl/prod/www:/var/www/certbot/:ro
-      - ./ssl/prod/cert:/etc/nginx/ssl/:ro
+      - ./ssl/prod/cert:/opt/nginx/ssl/:ro
     ports: 
       - 80:80
       - 443:443
@@ -85,4 +85,4 @@ services:
     image: certbot/certbot
     volumes:
       - ./ssl/prod/www:/var/www/certbot/:rw
-      - ./ssl/prod/cert:/etc/nginx/ssl/:rw
+      - ./ssl/prod/cert:/etc/letsencrypt/:rw
