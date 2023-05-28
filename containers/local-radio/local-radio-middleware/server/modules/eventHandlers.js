@@ -16,6 +16,7 @@ if (PIPE_AUDIO == 'true') {
 		device: 'hw:0,0',
 	});
 	speakerStream = new Readable();
+	speakerStream._read = () => {};
 	speakerStream.pipe(speaker);
 }
 
