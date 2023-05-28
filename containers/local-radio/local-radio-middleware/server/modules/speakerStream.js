@@ -24,7 +24,7 @@ export default class SpeakerStream {
 		setInterval(() => {
 			console.log('bufferQueue.length:', this.bufferQueue.length);
 			console.log('bufferIntervalId:', !this.bufferIntervalId)
-			if (this.bufferQueue.length && !this.bufferIntervalId) {
+			if (this.bufferQueue.length > 2 && !this.bufferIntervalId) {
 				this.activateStream();
 			} else if (!this.bufferQueue.length && this.bufferIntervalId) {
 				this.deactivateStream();
@@ -39,13 +39,11 @@ export default class SpeakerStream {
 
 	activateStream() {
 		console.log('activate speaker stream');
-		setTimeout(() => {
-			this.bufferIntervalId = setInterval(() => {
-				this.stream.push(this.bufferQueue[0]);
-				this.bufferQueue.shift();
-				console.log('speaker', this.bufferQueue[0].length);
-			}, this.bufferInterval);
-		}, this.bufferInterval * 1.5);
+		this.bufferIntervalId = setInterval(() => {
+			this.stream.push(this.bufferQueue[0]);
+			this.bufferQueue.shift();
+			console.log('speaker', this.bufferQueue[0].length);
+		}, this.bufferInterval);
 	}
 
 	deactivateStream() {
