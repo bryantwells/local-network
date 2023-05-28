@@ -12,6 +12,7 @@ if (PIPE_AUDIO) {
 		bitDepth: 16,         // 16-bit samples
 		sampleRate: 48000     // 44,100 Hz sample rate
 	});
+	console.log(speaker);
 }
 
 export default (io, icecastService) => {
