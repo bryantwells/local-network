@@ -44,8 +44,8 @@ export default (io, icecastService) => {
             .output('./buffer.mp3')
             .audioCodec('libmp3lame')
             .format('mp3')
-			.output('./buffer.wav')
-			.outputOptions('-ac 2')
+			.output('./buffer.raw')
+			.outputOptions('-ac 2 -f s16le -c:a pcm_s16le')
             .on('error', (err) => {
 
 				// on error
@@ -57,11 +57,11 @@ export default (io, icecastService) => {
 				// on encoding completion
                 const oggBuffer = readFileSync('./buffer.ogg');
 				const mp3Buffer = readFileSync('./buffer.mp3');
-				const wavBuffer = readFileSync('./buffer.wav');
+				const rawBuffer = readFileSync('./buffer.raw');
                 await icecastService.putSourceData(userId, mountId, oggBuffer, bufferLength, metadata, 'audio/ogg');
 				await icecastService.putSourceData(`${userId}-mp3`, `${mountId}-mp3`, mp3Buffer, bufferLength, metadata, 'audio/mp3');
 				if (PIPE_AUDIO) {
-					speakerStream.appendBuffer(wavBuffer);
+					speakerStream.appendBuffer(rawBuffer);
 				}
 				writeFile('./buffer.pcm', buffer, (error) => {
 					if (error) { console.log(error) }
