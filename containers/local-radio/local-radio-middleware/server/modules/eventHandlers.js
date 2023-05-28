@@ -42,7 +42,7 @@ export default (io, icecastService) => {
 		// send PCM data to speaker
 		if (speaker) {
 			const speakerStream = new Readable.from(buffer);
-			bufferStream.pipe(speaker);
+			speakerStream.pipe(speaker);
 			console.log('speaker', buffer);
 		}
 
