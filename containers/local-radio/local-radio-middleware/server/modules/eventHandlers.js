@@ -1,7 +1,7 @@
 import { PassThrough, Readable } from "stream";
 import { readFileSync, writeFile } from "fs";
 import Ffmpeg from "fluent-ffmpeg";
-import SpeakerStream from "./speakerStream";
+import SpeakerStream from "./speakerStream.js";
 
 const PIPE_AUDIO = process.env.PIPE_AUDIO && process.env.PIPE_AUDIO == 'true';
 let speakerStream;
