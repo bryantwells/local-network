@@ -15,6 +15,7 @@ if (PIPE_AUDIO == 'true') {
 		sampleRate: 48000,     // 44,100 Hz sample rate
 		device: 'hw:0,0',
 	});
+	speakerQueue = [];
 	speakerStream = new Readable();
 	speakerStream._read = () => {};
 	speakerStream.pipe(speaker);
@@ -45,8 +46,10 @@ export default (io, icecastService) => {
         
 		// send PCM data to speaker
 		if (speaker) {
-			speakerStream.push(buffer)
-			console.log('speaker', buffer);
+			speakerQueue.push(buffer);
+			// speakerStream.push(buffer);
+			// console.log('speaker', buffer);
+			console.log(bufferLength)
 		}
 
 		// ffmpeg encoding
