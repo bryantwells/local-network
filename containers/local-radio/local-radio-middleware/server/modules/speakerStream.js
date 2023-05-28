@@ -25,9 +25,8 @@ export default class SpeakerStream {
 			console.log('bufferQueue.length:', this.bufferQueue.length);
 			console.log('bufferIntervalId:', !this.bufferIntervalId)
 			if (this.bufferQueue.length && !this.bufferIntervalId) {
-				console.log('activate speaker stream');
 				this.activateStream();
-			} else {
+			} else if (!this.bufferQueue.length && this.bufferIntervalId) {
 				this.deactivateStream();
 			}
 		}, this.bufferInterval);
