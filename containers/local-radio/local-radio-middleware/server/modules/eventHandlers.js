@@ -5,6 +5,7 @@ import Speaker from "speaker";
 
 const PIPE_AUDIO = process.env.PIPE_AUDIO;
 let speaker = null;
+let speakerStream = null;
 console.log('PIPE_AUDIO: ', PIPE_AUDIO);
 
 if (PIPE_AUDIO == 'true') {
@@ -14,7 +15,8 @@ if (PIPE_AUDIO == 'true') {
 		sampleRate: 48000,     // 44,100 Hz sample rate
 		device: 'hw:0,0',
 	});
-	console.log(speaker);
+	speakerStream = new Readable();
+	speakerStream.pipe(speaker);
 }
 
 export default (io, icecastService) => {
@@ -42,8 +44,7 @@ export default (io, icecastService) => {
         
 		// send PCM data to speaker
 		if (speaker) {
-			const speakerStream = new Readable.from(buffer);
-			speakerStream.pipe(speaker);
+			speakerStream.push(buffer)
 			console.log('speaker', buffer);
 		}
 
