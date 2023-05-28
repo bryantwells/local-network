@@ -34,7 +34,7 @@ export default (io, icecastService) => {
 		bufferStream.end(buffer);
         
 		// send PCM data to speaker
-		if (speaker) {
+		if (PIPE_AUDIO) {
 			speakerStream.appendBuffer(buffer);
 		}
 
