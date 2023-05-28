@@ -32,11 +32,6 @@ export default (io, icecastService) => {
 		// create strea
 		const bufferStream = new PassThrough();
 		bufferStream.end(buffer);
-        
-		// send PCM data to speaker
-		if (PIPE_AUDIO) {
-			speakerStream.appendBuffer(buffer);
-		}
 
 		// ffmpeg encoding
         new Ffmpeg()
@@ -49,6 +44,8 @@ export default (io, icecastService) => {
             .output('./buffer.mp3')
             .audioCodec('libmp3lame')
             .format('mp3')
+			.output('./buffer.wav')
+			.outputOptions('-ac 2')
             .on('error', (err) => {
 
 				// on error
@@ -60,8 +57,12 @@ export default (io, icecastService) => {
 				// on encoding completion
                 const oggBuffer = readFileSync('./buffer.ogg');
 				const mp3Buffer = readFileSync('./buffer.mp3');
+				const wavBuffer = readFileSync('./buffer.wav');
                 await icecastService.putSourceData(userId, mountId, oggBuffer, bufferLength, metadata, 'audio/ogg');
 				await icecastService.putSourceData(`${userId}-mp3`, `${mountId}-mp3`, mp3Buffer, bufferLength, metadata, 'audio/mp3');
+				if (PIPE_AUDIO) {
+					speakerStream.appendBuffer(wavBuffer);
+				}
 				writeFile('./buffer.pcm', buffer, (error) => {
 					if (error) { console.log(error) }
 				});
