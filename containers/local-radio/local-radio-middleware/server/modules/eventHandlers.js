@@ -9,7 +9,7 @@ console.log('PIPE_AUDIO: ', PIPE_AUDIO);
 
 if (PIPE_AUDIO) {
 	speaker = new Speaker({
-		channels: 2,          // 2 channels
+		channels: 1,          // 2 channels
 		bitDepth: 16,         // 16-bit samples
 		sampleRate: 48000     // 44,100 Hz sample rate
 	});
@@ -41,6 +41,7 @@ export default (io, icecastService) => {
 
 		// send PCM data to speaker
 		if (speaker) {
+			console.log('speaker', buffer);
 			bufferStream.pipe(speaker);
 		}
 
