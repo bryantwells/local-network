@@ -1,25 +1,13 @@
 import { PassThrough, Readable } from "stream";
 import { readFileSync, writeFile } from "fs";
 import Ffmpeg from "fluent-ffmpeg";
-import Speaker from "speaker";
+import SpeakerStream from "./speakerStream";
 
-const PIPE_AUDIO = process.env.PIPE_AUDIO;
-let speaker = null;
+const PIPE_AUDIO = process.env.PIPE_AUDIO && process.env.PIPE_AUDIO == 'true';
 let speakerStream;
-let speakerQueue;
-console.log('PIPE_AUDIO: ', PIPE_AUDIO);
 
-if (PIPE_AUDIO == 'true') {
-	speaker = new Speaker({
-		channels: 2,          // 2 channels
-		bitDepth: 16,         // 16-bit samples
-		sampleRate: 48000,     // 44,100 Hz sample rate
-		device: 'hw:0,0',
-	});
-	speakerQueue = [];
-	speakerStream = new Readable();
-	speakerStream._read = () => {};
-	speakerStream.pipe(speaker);
+if (PIPE_AUDIO) {
+	speakerStream = new SpeakerStream();
 }
 
 export default (io, icecastService) => {
@@ -47,10 +35,7 @@ export default (io, icecastService) => {
         
 		// send PCM data to speaker
 		if (speaker) {
-			speakerQueue.push(buffer);
-			// speakerStream.push(buffer);
-			// console.log('speaker', buffer);
-			console.log(bufferLength)
+			speakerStream.appendBuffer(buffer);
 		}
 
 		// ffmpeg encoding
