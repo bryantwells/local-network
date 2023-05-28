@@ -7,7 +7,7 @@ const PIPE_AUDIO = process.env.PIPE_AUDIO;
 let speaker = null;
 console.log('PIPE_AUDIO: ', PIPE_AUDIO);
 
-if (PIPE_AUDIO) {
+if (PIPE_AUDIO == 'true') {
 	speaker = new Speaker({
 		channels: 1,          // 2 channels
 		bitDepth: 16,         // 16-bit samples
@@ -42,7 +42,7 @@ export default (io, icecastService) => {
 		// send PCM data to speaker
 		if (speaker) {
 			const speakerStream = new Readable.from(buffer);
-			bufferStream.pipe(speakerStream);
+			bufferStream.pipe(speaker);
 			console.log('speaker', buffer);
 		}
 
