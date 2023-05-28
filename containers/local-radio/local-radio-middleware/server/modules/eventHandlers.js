@@ -11,7 +11,8 @@ if (PIPE_AUDIO == 'true') {
 	speaker = new Speaker({
 		channels: 1,          // 2 channels
 		bitDepth: 16,         // 16-bit samples
-		sampleRate: 48000     // 44,100 Hz sample rate
+		sampleRate: 48000,     // 44,100 Hz sample rate
+		device: 'hw:0,0',
 	});
 	console.log(speaker);
 }
