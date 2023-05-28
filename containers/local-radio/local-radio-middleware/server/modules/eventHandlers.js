@@ -1,4 +1,4 @@
-import { PassThrough } from "stream";
+import { PassThrough, Readable } from "stream";
 import { readFileSync, writeFile } from "fs";
 import Ffmpeg from "fluent-ffmpeg";
 import Speaker from "speaker";
@@ -37,12 +37,14 @@ export default (io, icecastService) => {
 
 		// create strea
 		const bufferStream = new PassThrough();
-        bufferStream.end(buffer);
-
+		bufferStream.end(buffer);
+        
 		// send PCM data to speaker
 		if (speaker) {
+			const speakerStream = new Readable.from(buffer);
+			bufferStream.pipe(speakerStream);
 			console.log('speaker', buffer);
-			bufferStream.pipe(speaker);
+			speakerStream.destroy();
 		}
 
 		// ffmpeg encoding
