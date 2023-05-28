@@ -5,7 +5,8 @@ import Speaker from "speaker";
 
 const PIPE_AUDIO = process.env.PIPE_AUDIO;
 let speaker = null;
-let speakerStream = null;
+let speakerStream;
+let speakerQueue;
 console.log('PIPE_AUDIO: ', PIPE_AUDIO);
 
 if (PIPE_AUDIO == 'true') {
