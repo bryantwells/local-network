@@ -34,6 +34,7 @@ export default class SpeakerStream {
 					this.bufferQueue.shift();
 				} else {
 					clearInterval(this.bufferIntervalId);
+					this.bufferIntervalId = null;
 				}
 			},  this.bufferLength / this.sampleRate * 1000);
 		}
