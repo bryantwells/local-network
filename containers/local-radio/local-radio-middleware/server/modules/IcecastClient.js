@@ -154,10 +154,10 @@ export class IcecastClient {
                 this.putRequest.on('error', () => {
                     console.log("socket closed");
                 });
-                console.log('put', data.length);
+                // console.log('put', data);
             } else {
                 this.putRequest.write(data);
-                console.log('write', data);
+                // console.log('write', data);
             }
         }
     }
