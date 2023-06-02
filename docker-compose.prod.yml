@@ -26,9 +26,14 @@ services:
   radio-middleware:
     container_name: local-radio-middleware
     restart: unless-stopped
+    privileged: true
     build:
       context: ./containers/local-radio/local-radio-middleware
       dockerfile: Dockerfile.prod
+    environment:
+      - PIPE_AUDIO=$PIPE_AUDIO
+    devices:
+      - '/dev/snd:/dev/snd'
 
   # Radio Server
   radio-server:
