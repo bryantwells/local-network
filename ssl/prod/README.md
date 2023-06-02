@@ -8,6 +8,9 @@ docker compose -f docker-compose.prod.yml run --rm certbot certonly --webroot --
 ```
 docker compose -f docker-compose.prod.yml run --rm certbot certonly --webroot --webroot-path /var/www/certbot/ -d bln.projecteats.org -d radio-middleware.bln.projecteats.org -d radio-server.bln.projecteats.org -d tv-middleware.bln.projecteats.org -d tv-server.bln.projecteats.org -d library.bln.projecteats.org
 ```
+```
+docker compose -f docker-compose.prod.yml run --rm certbot certonly --webroot --webroot-path /var/www/certbot/ -d library.bln.projecteats.org
+```
 
 ### DNS Challenge
 ```
