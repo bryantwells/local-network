@@ -27,7 +27,7 @@ export default class SpeakerStream {
 	appendBuffer(buffer) {
 		this.bufferQueue.push(buffer);
 		console.log('speaker', buffer);
-		if (this.bufferQueue.length > 1 && !this.bufferIntervalId) {
+		if (this.bufferQueue.length > 2 && !this.bufferIntervalId) {
 			this.bufferIntervalId = setInterval(() => {
 				if (this.bufferQueue.length) {
 					this.stream.push(this.bufferQueue[0]);
