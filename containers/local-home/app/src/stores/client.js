@@ -23,6 +23,7 @@ export const useClientStore = defineStore('client', () => {
 		axios.get(`//ip.${ HOSTNAME }`)
             .then(response => {
 				ip.value = response.data;
+				console.log('ip:', ip.value);
 			});
 	}
 

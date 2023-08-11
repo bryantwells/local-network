@@ -3,10 +3,10 @@ https://hackmd.io/@Vatten/HyA1k1_ut
 
 ### HTTP-01 Challenge
 ```
-docker compose -f docker-compose.prod.yml run --rm certbot certonly --webroot --webroot-path /var/www/certbot/ --dry-run -d bln.projecteats.org -d radio-middleware.bln.projecteats.org -d radio-server.bln.projecteats.org -d tv-middleware.bln.projecteats.org -d tv-server.bln.projecteats.org -d library.bln.projecteats.org
+docker compose -f docker-compose.prod.yml run --rm certbot certonly --webroot --webroot-path /var/www/certbot/ --dry-run -d bln.projecteats.org -d radio-middleware.bln.projecteats.org -d radio-server.bln.projecteats.org -d tv-middleware.bln.projecteats.org -d tv-server.bln.projecteats.org -d library.bln.projecteats.org -d ip.bln.projecteats.org
 ```
 ```
-docker compose -f docker-compose.prod.yml run --rm certbot certonly --webroot --webroot-path /var/www/certbot/ -d bln.projecteats.org -d radio-middleware.bln.projecteats.org -d radio-server.bln.projecteats.org -d tv-middleware.bln.projecteats.org -d tv-server.bln.projecteats.org -d library.bln.projecteats.org
+docker compose -f docker-compose.prod.yml run --rm certbot certonly --webroot --webroot-path /var/www/certbot/ -d bln.projecteats.org -d radio-middleware.bln.projecteats.org -d radio-server.bln.projecteats.org -d tv-middleware.bln.projecteats.org -d tv-server.bln.projecteats.org -d library.bln.projecteats.org -d ip.bln.projecteats.org
 ```
 ```
 docker compose -f docker-compose.prod.yml run --rm certbot certonly --webroot --webroot-path /var/www/certbot/ -d dashboard.bln.projecteats.org
