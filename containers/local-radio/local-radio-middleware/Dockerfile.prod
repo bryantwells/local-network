@@ -1,5 +1,5 @@
 # Use Node base image
-FROM node:bullseye
+FROM node:19-bullseye
 
 # Install sound library
 RUN apt update && \
@@ -14,7 +14,7 @@ WORKDIR /usr/src/local-radio-middleware
 COPY ./server/package*.json ./
 
 # Install dependencies
-RUN npm ci
+RUN npm i
 
 # Copy files
 COPY ./server ./
