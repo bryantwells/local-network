@@ -7,7 +7,7 @@ import Button from '@/components/Button.vue';
 		to="/info"
 		class="InfoLink InfoLink--radio">
 		<div class="InfoLink-title">
-			Local Radio is currently incative and available for broadcasting.
+			Local Radio is currently inactive.
 		</div>
 		<Button
 			label="Learn More"

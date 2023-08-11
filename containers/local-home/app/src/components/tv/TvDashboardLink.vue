@@ -1,6 +1,5 @@
 <script setup>
-import { mapState } from 'pinia';
-import { useTvStore } from '@/stores/tv';
+	import Button from '@/components/Button.vue';
 </script>
 
 <template>
@@ -9,26 +8,25 @@ import { useTvStore } from '@/stores/tv';
 		to="/tv">
 		<div 
 			class="DashboardLink-title">
-			Local TV is currently available for broadcasting
+			Local TV is available for broadcasting
 		</div>
-		<a 
-			class="DashboardLink-button">
-			Create Video Stream
-		</a>
+		<Button
+			label="Create Video Stream"
+			style="
+				--color: var(--color-tv);
+			"
+		/>
 	</router-link>
 </template>
 
 <script>
 export default {
 	name: "TvDashboardLink",
-	computed: {
-		...mapState(useTvStore, ['sources']),
-	},
 }
 </script>
 
 <style>
 .DashboardLink--tv {
-	background-color: rgb(0,255,0);
+	background-color: var(--color-tv);
 }
 </style>

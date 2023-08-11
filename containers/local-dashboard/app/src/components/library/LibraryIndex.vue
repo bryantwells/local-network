@@ -5,7 +5,7 @@ import FileList from '@/components/library/FileList.vue';
 <template>
     <div 
 		class="LibraryIndex">
-        <FileList />
+        <FileList :root="$route.params.root" />
     </div>
 </template>
 

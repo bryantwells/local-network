@@ -1,14 +1,14 @@
 import { PassThrough } from "stream";
 import { readFileSync, writeFile } from "fs";
 import Ffmpeg from "fluent-ffmpeg";
-import SpeakerStream from "./speakerStream.js";
+// import SpeakerStream from "./speakerStream.js";
 
 const PIPE_AUDIO = process.env.PIPE_AUDIO && process.env.PIPE_AUDIO == 'true';
-let speakerStream;
+// let speakerStream;
 
-if (PIPE_AUDIO) {
-	speakerStream = new SpeakerStream();
-}
+// if (PIPE_AUDIO) {
+// 	speakerStream = new SpeakerStream();
+// }
 
 export default (io, icecastService) => {
 

@@ -1,30 +1,40 @@
 <script setup>
 import { mapState } from 'pinia';
 import { useLibraryStore } from '@/stores/library';
+import Button from '@/components/Button.vue';
 </script>
 
 <template>
-	<a class="DashboardLink DashboardLink--library">
-		<div class="DashboardLink-title">
-			Local Library (Available)
+	<router-link  
+		class="DashboardLink DashboardLink--library"
+		to="/library">
+		<div 
+			class="DashboardLink-title">
+			Local Archive is hosting {{ totalSizeInMb }}mb of community media.
 		</div>
-		<a class="DashboardLink-button">
-			Upload Media
-		</a>
-	</a>
+		<Button
+			label="View The Archive"
+			style="
+				--color: var(--color-library);
+			"
+		/>
+	</router-link>
 </template>
 
 <script>
 export default {
 	name: "LibraryDashboardLink",
 	computed: {
-		...mapState(useLibraryStore, ['files']),
+		...mapState(useLibraryStore, ['files', 'rootUrl', 'latestFile', 'totalSize']),
+		totalSizeInMb() {
+			return (this.totalSize) ? Math.round((this.totalSize / 1000000) * 100)/100 : 0;
+		}
 	},
 }
 </script>
 
 <style>
 .DashboardLink--library {
-	background-color: rgb(0,0,255);
+	background-color: var(--color-library);
 }
 </style>

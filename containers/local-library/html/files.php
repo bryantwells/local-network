@@ -10,10 +10,16 @@
 			if (in_array($file, $ignored)) continue;
 			if (!in_array($file, $ignored)) {
 				$files[] = [
-					'path' => $file,
+					'name' => $file,
+					'path' => str_replace('/var/www/files', '', $dir) . '/' . $file,
 					'time' => filemtime($dir . '/' . $file),
 					'size' => filesize($dir . '/' . $file),
+					'isDir' => is_dir($dir . '/' . $file),
 				];
+				if (is_dir($dir . '/' . $file)) {
+					$i = count($files) - 1;
+					$files[$i]['files'] = scan_dir($dir . '/' . $file);
+				}
 			}
 		}	
 		usort($files, 'cmp_time');

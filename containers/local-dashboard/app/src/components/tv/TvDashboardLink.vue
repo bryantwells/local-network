@@ -8,7 +8,7 @@
 		to="/tv">
 		<div 
 			class="DashboardLink-title">
-			Local TV is currently incative and available for broadcasting.
+			Local TV is currently inactive and available for broadcasting.
 		</div>
 		<Button
 			label="Create Video Stream"

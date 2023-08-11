@@ -33,6 +33,9 @@ import Button from '@/components/Button.vue';
         </div>
         <Button 
             label="Upload"
+            style="
+                --color: var(--color-library);
+            "
             @click="uploadStagedFile"
         />
     </div>

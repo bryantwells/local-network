@@ -7,7 +7,7 @@ import BodyText from '@/components/BodyText.vue';
         class="Dashboard Dashboard--tv">
         <BodyText
             color="rgb(0,255,0)">
-            <p>Local TV can only be operated from the office on the MGX farm. To set up a stream, follow these directions:</p>
+            <p>Local TV can only be operated from the studio at MGX. To set up a stream, follow these directions:</p>
             <ol>
                 <li>
                     Open <a href="https://obsproject.com/" target="blank">OBS Studio</a>.

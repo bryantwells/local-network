@@ -1,5 +1,5 @@
 # Use Node base image
-FROM node:bullseye
+FROM node:19-bullseye
 
 # Install sound library
 RUN apt update && \

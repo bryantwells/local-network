@@ -1,4 +1,5 @@
 import HomePage from '@/views/HomePage.vue';
+import WelcomePage from '@/views/WelcomePage.vue';
 import RadioDashboardPage from '@/views/RadioDashboardPage.vue';
 import TvDashboardPage from '@/views/TvDashboardPage.vue';
 import LibraryIndexPage from '@/views/LibraryIndexPage.vue';
@@ -7,6 +8,14 @@ import LibraryDashboardPage from '@/views/LibraryDashboardPage.vue';
 export default [
     {
         path: '/',
+        name: 'WelcomePage',
+        component: WelcomePage,
+        meta: {
+            title: 'Brownsville Local Network',
+        }
+    },
+    {
+        path: '/home',
         name: 'HomePage',
         component: HomePage,
         meta: {
@@ -30,7 +39,7 @@ export default [
         }
     },
     {
-        path: '/library',
+        path: '/library/:root?',
         name: 'LibraryIndexPage',
         component: LibraryIndexPage,
         meta: {

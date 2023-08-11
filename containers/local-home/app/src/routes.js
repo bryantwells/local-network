@@ -1,10 +1,13 @@
+import WelcomePage from '@/views/WelcomePage.vue';
 import HomePage from '@/views/HomePage.vue';
 import RadioPage from '@/views/RadioPage.vue';
 import TvPage from '@/views/TvPage.vue';
-import LibraryPage from '@/views/LibraryPage.vue';
+import LibraryDashboardPage from '@/views/LibraryDashboardPage.vue';
+import LibraryIndexPage from '@/views/LibraryIndexPage.vue';
 import InfoPage from '@/views/InfoPage.vue';
 
 export default [
+
     {
         path: '/',
         name: 'HomePage',
@@ -30,11 +33,19 @@ export default [
         }
     },
     {
-        path: '/library',
-        name: 'LibraryPage',
-        component: LibraryPage,
+        path: '/library/:root?',
+        name: 'LibraryIndexPage',
+        component: LibraryIndexPage,
         meta: {
-            title: 'BLN: Local Archive',
+            title: 'BLN Dashboard: Local Archive',
+        }
+    },
+    {
+        path: '/library/upload',
+        name: 'LibraryDashboardPage',
+        component: LibraryDashboardPage,
+        meta: {
+            title: 'BLN Dashboard: Local Archive',
         }
     },
     {

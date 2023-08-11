@@ -20,8 +20,8 @@ export const useLibraryStore = defineStore('library', () => {
 	});
 
 	// Functions
-	function getFiles() {
-		axios.get(`//library.${ HOSTNAME }/files.php`)
+	function getFiles(subDir = "") {
+		axios.get(`//library.${ HOSTNAME }/files.php?subdir=${ subDir }`)
 			.then(response => {
 				files.value = response.data;
 			});

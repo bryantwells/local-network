@@ -1,7 +1,9 @@
 <script setup>
 import { mapState } from 'pinia';
+import { useClientStore } from '@/stores/client';
 import { useTvStore } from '@/stores/tv';
 import Viewer from '@/components/Viewer.vue';
+import Dashboard from '@/components/Dashboard.vue';
 import InfoLink from '@/components/InfoLink.vue';
 </script>
 
@@ -10,8 +12,12 @@ import InfoLink from '@/components/InfoLink.vue';
         v-if="activeSource"
         type="tv"
     />
+    <Dashboard
+        v-else-if="!activeSource && clientIsLocal"
+        type="tv"
+    />
     <InfoLink
-        v-else
+        v-else-if="!activeSource && !clientIsLocal"
         type="tv"
     />
 </template>
@@ -27,6 +33,7 @@ export default {
         userId: String,
     },
     computed: {
+        ...mapState(useClientStore, { clientIsLocal: 'isLocal', clientIp: 'ip' }),
 		...mapState(useTvStore, ['activeSource']),
 	},
 };

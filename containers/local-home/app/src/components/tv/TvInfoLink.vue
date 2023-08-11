@@ -7,7 +7,7 @@ import Button from '@/components/Button.vue';
 		to="/info"
 		class="InfoLink InfoLink--tv">
 		<div class="InfoLink-title">
-			Local TV is currently incative and available for broadcasting.
+			Local TV is available for broadcasting.
 		</div>
 		<Button
 			label="Learn More"

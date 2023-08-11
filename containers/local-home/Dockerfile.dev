@@ -1,5 +1,5 @@
 # Use Node base image
-FROM node:bullseye
+FROM node:19-bullseye
 
 # Set the work directory
 WORKDIR /usr/src/local-home-app
