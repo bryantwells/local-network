@@ -40,6 +40,6 @@ export default {
 
 <style>
 .Dashboard--tv {
-    background-color: rgb(0,255,0);
+    background-color: var(--color-tv);
 }
 </style>

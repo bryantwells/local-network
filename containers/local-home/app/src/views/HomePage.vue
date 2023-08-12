@@ -35,7 +35,7 @@ import InfoLink from '@/components/InfoLink.vue';
             type="tv"
         />
         <InfoLink
-            v-else-if="!activeRadioSource && !clientIsLocal"
+            v-else-if="!activeTvSource && !clientIsLocal"
             type="tv"
         />
 
@@ -45,8 +45,12 @@ import InfoLink from '@/components/InfoLink.vue';
             type="library"
         />
         <ViewerLink 
-            v-else-if="clientIsLocal"
+            v-else-if="!clientIsLocal"
             type="library"
+        />
+
+        <InfoLink
+            type="about"
         />
 
     </section>
@@ -78,7 +82,7 @@ export default {
 @media (max-width: 600px) {
     .Page--home {
         grid-template-columns: unset;
-        grid-template-rows: 1fr 1fr 1fr;
+        grid-template-rows: 1fr 1fr 1fr 1fr;
     }
 }
 </style>

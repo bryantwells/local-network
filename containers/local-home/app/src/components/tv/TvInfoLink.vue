@@ -3,19 +3,12 @@ import Button from '@/components/Button.vue';
 </script>
 
 <template>
-	<router-link
-		to="/info"
+	<div
 		class="InfoLink InfoLink--tv">
 		<div class="InfoLink-title">
-			Local TV is available for broadcasting.
+			Local TV is inactive. Connect to the BLN WiFi hotspot to start a new video stream.
 		</div>
-		<Button
-			label="Learn More"
-			style="
-				--color: var(--color-tv)
-			"
-		/>
-	</router-link>
+	</div>
 </template>
 
 <script>

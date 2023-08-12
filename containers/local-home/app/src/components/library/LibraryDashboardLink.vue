@@ -7,10 +7,13 @@ import Button from '@/components/Button.vue';
 <template>
 	<router-link  
 		class="DashboardLink DashboardLink--library"
-		to="/library">
+		to="/library"
+		:style="{
+			backgroundImage: (files.length) ? `url('${ rootUrl }/files/${ latestFile.path }')` : '',
+		}">
 		<div 
 			class="DashboardLink-title">
-			Local Archive is hosting {{ totalSizeInMb }}mb of community media.
+			Local Archive uses {{ totalSizeInMb }}mb of memory.
 		</div>
 		<Button
 			label="View The Archive"
@@ -34,7 +37,16 @@ export default {
 </script>
 
 <style>
-.DashboardLink--library {
+.DashboardLink.DashboardLink--library {
+	background-size: cover;
+	background-position: center;
 	background-color: var(--color-library);
+	color: white;
+	text-shadow: 
+		0 0 0.1rem var(--color-library),
+		0 0 0.1rem var(--color-library),
+		0 0 0.1rem var(--color-library),
+		0 0 0.1rem var(--color-library),
+		0 0 0.1rem var(--color-library);
 }
 </style>

@@ -5,21 +5,19 @@ import { useLibraryStore } from '@/stores/library';
 
 
 <template>
-	<router-link 
+	<div 
 		class="ViewerLink ViewerLink--library"
-		to="/library"
 		:style="{
 			backgroundImage: (files.length) ? `url('${ rootUrl }/files/${ latestFile.path }')` : '',
 		}">
 		<div 
 			class="ViewerLink-title">
-			Local Archive
+			Local Archive uses {{ totalSizeInMb }}mb of memory. Connect to the BLN WiFi hotspot to contribute.
 		</div>
 		<div 
 			class="ViewerLink-subTitle">
-			{{ totalSizeInMb }}mb
 		</div>
-	</router-link>
+	</div>
 </template>
 
 <script>

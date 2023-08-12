@@ -5,7 +5,9 @@ import BodyText from '@/components/BodyText.vue';
 <template>
 	<section class="Page Page--info">
 		<BodyText>
-			Welcome to the Project EATS Local Network at MGX! This website is hosted on the farm at Chester and DuMont. You are invited to listen and broadcast audio, video, and share digital resources.
+			<p>Welcome to the Brownsville Local Network! This is an internet platform created for and by Brownsville residents.</p> 
+			<p>Residents are invited to broadcast and share art, stories, and resources via the BLN. To edit this site's contents, just connect to one of our free WiFi hotspots (named "Brownsville Local Network") and visit this URL (bln.projectearts.org).</p>
+			<p>If you would like support in making, scheduling, or promoting your own broadcast, or if you would like to participate in one of our free technical and creative workshops, please email us at <a href="mailto:bln@projecteats.org">bln@projecteats.org</a>.</p>
 		</BodyText>
 	</section>
 </template>
@@ -21,7 +23,7 @@ export default {
 
 <style>
 .Page--info{
-	background-color: lightgrey;
+	background-color: var(--color-about);
 	padding: var(--space-sm);
 	border-radius: var(--border-radius);
 	min-height: 100%;

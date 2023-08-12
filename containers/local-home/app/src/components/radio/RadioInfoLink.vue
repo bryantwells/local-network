@@ -3,19 +3,12 @@ import Button from '@/components/Button.vue';
 </script>
 
 <template>
-	<router-link
-		to="/info"
+	<div
 		class="InfoLink InfoLink--radio">
 		<div class="InfoLink-title">
-			Local Radio is currently inactive.
+			Local Radio is inactive. Connect to the BLN WiFi hotspot to start a new audio stream.
 		</div>
-		<Button
-			label="Learn More"
-			style="
-				--color: var(--color-radio)
-			"
-		/>
-	</router-link>
+	</div>
 </template>
 
 <script>

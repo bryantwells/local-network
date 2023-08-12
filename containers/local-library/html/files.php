@@ -15,6 +15,7 @@
 					'time' => filemtime($dir . '/' . $file),
 					'size' => filesize($dir . '/' . $file),
 					'isDir' => is_dir($dir . '/' . $file),
+					'ext' => strtolower(pathinfo($dir . '/' . $file, PATHINFO_EXTENSION)),
 				];
 				if (is_dir($dir . '/' . $file)) {
 					$i = count($files) - 1;

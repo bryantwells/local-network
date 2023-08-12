@@ -6,9 +6,6 @@ import Button from '@/components/Button.vue';
 
 <template>
 	<div class="FileList">
-		<header class="FileList-header">
-			Index Of /{{ root }}
-		</header>
 		<div class="FileList-container">
 			<ul
 				class="FileList-body">
@@ -22,7 +19,11 @@ import Button from '@/components/Button.vue';
 						:href="`${ rootUrl }/files${ file.path }`"
 						target="blank">
 						<div class="FileList-icon">
-							<img class="FileList-image" :src="`${ rootUrl }/files${ file.path }`" alt="">
+							<img 
+								v-if="['jpg','jpeg','png','gif','tiff'].includes(file.ext)"
+								class="FileList-image" 
+								:src="`${ rootUrl }/files${ file.path }`" 
+								alt="">
 						</div>
 						<span class="FileList-label">./{{ file.name }}</span>
 					</a>
@@ -37,7 +38,6 @@ import Button from '@/components/Button.vue';
 			</ul>
 		</div>
 		<Button 
-			v-if="root"
             label="Upload To The Archive"
             style="
                 --color: var(--color-library);
@@ -92,8 +92,13 @@ export default {
     display: grid;
 	font-family: monospace;
 	align-items: start;
-	grid-template-columns: 1fr 1fr 1fr 1fr;
+	grid-template-columns: 1fr 1fr 1fr;
 	gap: var(--space-sm);
+}
+@media (max-width: 900px) {
+    .FileList-body {
+        grid-template-columns: 1fr 1fr;
+    }
 }
 .FileList-item {
 	cursor: pointer;
@@ -103,17 +108,28 @@ export default {
 }
 .FileList-link {
 	padding: 0.25rem 0;
-	display: block;
 	max-width: calc(100vw - var(--space-sm) * 4);
 	width:0;
 	min-width:100%;
 	font-size: 0.75rem;
 }
 .FileList-icon {
+	position: relative;
 	aspect-ratio: 1 / 1;
-	border: 0.1rem solid currentColor;
 	border-radius: 0.2rem;
 	margin-bottom: var(--space-sm);
+}
+.FileList-icon::before {
+	content: '📄';
+	display: block;
+	position: absolute;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	top: 0; left: 0;
+	bottom: 0; right: 0;
+	border: 0.1rem solid black;
+	border-radius: 0.25rem;
 }
 .FileList-image {
 	width: 100%;
@@ -121,6 +137,7 @@ export default {
 	object-fit: cover;
 	object-position: center center;
 	border-radius: 0.25rem;
+	position: relative
 }
 .FileList-label {
 	width:0;
@@ -128,7 +145,7 @@ export default {
 	text-overflow: ellipsis;
 	display: block;
 	overflow: hidden;
-	text-align: center;
+	/* text-align: center; */
 }
 .FileList .Button {
 	margin-top: 0.5rem;

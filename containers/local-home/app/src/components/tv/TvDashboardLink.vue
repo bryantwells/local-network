@@ -8,7 +8,7 @@
 		to="/tv">
 		<div 
 			class="DashboardLink-title">
-			Local TV is available for broadcasting
+			Local TV is available for broadcasting.
 		</div>
 		<Button
 			label="Create Video Stream"

@@ -1,6 +1,7 @@
 <script setup>
 import RadioInfoLink from '@/components/radio/RadioInfoLink.vue';
 import TvInfoLink from '@/components/tv/TvInfoLink.vue';
+import AboutInfoLink from '@/components/about/AboutInfoLink.vue';
 </script>
 
 <template>
@@ -8,6 +9,8 @@ import TvInfoLink from '@/components/tv/TvInfoLink.vue';
 		v-if="type == 'radio'" />
 	<TvInfoLink
 		v-if="type == 'tv'" />
+	<AboutInfoLink
+		v-if="type == 'about'" />
 </template>
 
 <script>
