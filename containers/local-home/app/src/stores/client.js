@@ -14,10 +14,10 @@ export const useClientStore = defineStore('client', () => {
 	// Getters
 	const isLocal = computed(() => {
 		return ip.value.startsWith('96.57.70.194')
-			// || ip.value.startsWith('192.')
-			// || ip.value.startsWith('172.')
-			// || ip.value.startsWith('10.')
-			// || ip.value.startsWith('96.56.97.26');
+			|| ip.value.startsWith('192.')
+			|| ip.value.startsWith('172.')
+			|| ip.value.startsWith('10.')
+			|| ip.value.startsWith('96.56.97.26');
 	});
 
 	// Functions
